@@ -42,8 +42,13 @@ let GetLevel = (password) => {
 // module.exports = GeneralJWT;
 // module.exports = IsAuthenticated;
 // module.exports = GetLevel;
-export {
-    GeneralJWT,
-    IsAuthenticated,
-    GetLevel,
-}
+// export {
+    // GeneralJWT,
+    // IsAuthenticated,
+    // GetLevel,
+// }
+module.exports = {
+    GeneralJWT: GeneralJWT,
+    IsAuthenticated: IsAuthenticated,
+    GetLevel: GetLevel
+};
