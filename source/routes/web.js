@@ -1,5 +1,6 @@
 import express from "express";
 import {home, auth} from "./../controllers/index";
+import UserModel from './../models/user.model';
 
 let router = express.Router();
 
@@ -12,15 +13,17 @@ let initRoutes = (app) => {
     // router.get("/test-database", async function (req, res){
     //     try {
     //         let item = {
-    //             userId: "123456789",
-    //             contactId: "2342348959"
+    //             username: "Quản trị viên 1",
+    //             // class: "KHMT-02-K62",
+    //             email: "anhhau40033@gmail.com",
+    //             role: "admin"
     //         };
-    //         let contact = await ContactModel.createNew(item);
-    //         res.send(contact);
+    //         let user = await UserModel.createNew(item);
+    //         res.send(user);
     //     } catch (error) {
     //         console.log(error);
     //     }
-    // })
+    // });
     
     router.get("/", async function (req, res) {
         res.render("./login/login", {layout: false});

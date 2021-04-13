@@ -2,7 +2,7 @@ import authen from "./../libs/authen";
 import cfg from "./../libs/config";
 
 let getLoginRegister = async function (req, res) {
-  const username = await authen.IsAuthenticated(req.cookies["dG9rZW4"]);
+  const username = await authen.IsAuthenticated(req.cookies["xxxxx"]);
   if (username) {
       res.redirect("/")
   }
@@ -10,16 +10,19 @@ let getLoginRegister = async function (req, res) {
 };
 
 let getLogout = (req, res) => {
-  res.cookie("dG9rZW4", "");
+  res.cookie("xxxxx", "");
   res.redirect("/");
 };
 
 let postLogin = (req, res) => {
-  let token = authen.GeneralJWT(req.body.pwd);
+  let email = req.body.email;
+  let pwd = req.body.pwd;
+  console.log(email, pwd);
+  let token = authen.GeneralJWT(pwd, email);
   if (token) {
-      res.cookie("dG9rZW4", token, {
+      res.cookie("xxxxx", token, {
           maxAge: 1 * 60 * 6000 * cfg.authen['expiresIn']
-      }); //token được encode thành dG9rZW4
+      }); //token được encode thành xxxxx
       
       res.redirect("/index");
       

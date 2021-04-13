@@ -4,12 +4,12 @@ const jwt = require('jsonwebtoken');
 
 
 
-let GeneralJWT = (password) => {
+let GeneralJWT = (password, email) => {
     if (password in cfg.account) {
         let payload = {
             "level": cfg.account[password]
         }
-        let token = jwt.sign(payload, cfg.authen['key'], {
+        let token = jwt.sign(payload, email, {
             expiresIn: 1 * 60 * 60 * cfg.authen['expiresIn']
         });
         return token;

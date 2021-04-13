@@ -10,7 +10,4 @@ app:
   port: 9678
 
 url:
-  statisticThongkeUrl: "https://localhost:9999/company-manage/v1/statistic/thongke"
-  orgInfoUrl: "https://localhost:9999/company-info/v1"
-  orgManageCompanyUrl: "https://localhost:9999/company-manage/v1/company"
-  orgManageUrl: "https://localhost:9999/company-manage/v1"
+

@@ -19,4 +19,11 @@ let connectDB = () => {
     return mongoose.connect(URI, {useMongoClient: true});
 }
 
-module.exports = connectDB;
+let getUser = (email, password) => {
+    //
+}
+
+module.exports = {
+    connectDB: connectDB,
+    getUser: getUser
+};

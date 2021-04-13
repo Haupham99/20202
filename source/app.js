@@ -6,7 +6,7 @@ const express_handlebars_sections = require('express-handlebars-sections');
 const path = require('path');
 const app = express();
 //Connect to MongoDB
-ConnectDB();
+ConnectDB.connectDB;
 const rateLimit = require('express-rate-limit');
 
 app.use(express.static("./source/static"));

@@ -22,4 +22,10 @@ let UserSchema = new Schema({
     deletedAt: {type: Number, default: null}
 });
 
+UserSchema.statics = {
+    createNew(item) {
+        return this.create(item);
+    }
+};
+
 module.exports = mongoose.model("user", UserSchema);
