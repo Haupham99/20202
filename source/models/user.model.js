@@ -36,7 +36,7 @@ UserSchema.statics = {
     },
 
     findByToken(token){
-        return this.findOne({"verifyToken": token}).exec();
+        return this.findOne({verifyToken: token}).exec();
     },
 
     verify(token) {
