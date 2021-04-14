@@ -25,6 +25,10 @@ let UserSchema = new Schema({
 UserSchema.statics = {
     createNew(item) {
         return this.create(item);
+    },
+
+    findByEmail(email) {
+        return this.findOne({"email": email}).exec();
     }
 };
 

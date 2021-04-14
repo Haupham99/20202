@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="login-wrap">
+	<div class="login-html">
+		<div style="margin-bottom: 10px;">
+			<% if(errors != "") { %>
+				<% errors.forEach((item) => { %>
+					<div class="alert alert-danger">
+						<div class="container">
+							<%- item %>
+					   </div>
+				   </div>
+				<% }); %>
+			<% } %>
+			<% if(success != "") { %>
+				<% success.forEach((item) => { %>
+					<div class="alert alert-success">
+						<div class="container">
+							<%- item %>
+						</div>
+					</div>
+				<% }); %>
+			<% } %>
+			
+			
+		</div>
+        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign Up</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
+		<div class="login-form">
+			<div class="sign-in-htm">
+				<form action="/register" method="POST">
+				<div class="group">
+					<label for="email-register" class="label">Email</label>
+					<input id="email-register" name="email-register" type="text" class="input">
+				</div>
+				<div class="group">
+					<label for="pwd-register" class="label">Password</label>
+					<input id="pwd-register" name="pwd-register" type="password" class="input" data-type="password">
+				</div>
+				<div class="group">
+					<label for="pwd-confimation-register" class="label">Repeat Password</label>
+					<input id="pwd-confimation-register" name="pwd-confimation-register" type="password" class="input" data-type="password">
+				</div>
+				<div class="group">
+					<a href="verify2FA"><input type="submit" class="button" value="Sign Up"></a>
+				</div>
+				<div class="hr"></div>
+				<div class="foot-lnk">
+					<a href="./login">Already Member?</a>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+

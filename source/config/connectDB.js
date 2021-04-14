@@ -16,14 +16,11 @@ let connectDB = () => {
     let DB_PASSWORD = "";
 
     let URI = `${DB_CONNECTION}://${DB_HOST}:${DB_PORT}/${DB_NAME}`;
-    return mongoose.connect(URI, {useMongoClient: true});
+    return mongoose.connect(URI, { useUnifiedTopology: true, useNewUrlParser: true });
 }
 
 let getUser = (email, password) => {
     //
 }
 
-module.exports = {
-    connectDB: connectDB,
-    getUser: getUser
-};
+module.exports = connectDB;

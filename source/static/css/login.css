@@ -13,8 +13,8 @@ a{color:inherit;text-decoration:none}
 .login-wrap{
 	width:100%;
 	margin:auto;
-	max-width:525px;
-	min-height:670px;
+	max-width:925px;
+	min-height:820px;
 	position:relative;
 	background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
@@ -93,6 +93,7 @@ a{color:inherit;text-decoration:none}
 }
 .login-form .group .button{
 	background:#1161ee;
+	cursor: pointer;
 }
 .login-form .group label .icon{
 	width:15px;
@@ -148,4 +149,71 @@ a{color:inherit;text-decoration:none}
 }
 .foot-lnk{
 	text-align:center;
+}
+
+/* alerts */
+
+.alert {
+    border: 0;
+    border-radius: 0;
+    padding: 20px 15px !important;
+    line-height: 20px;
+    font-weight: 300;
+    color: #fff;
+}
+
+.alert .alert-icon {
+    display: block;
+    float: left;
+    margin-right: 1.071rem;
+}
+
+.alert b {
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.close {
+    float: right;
+    font-size: 1.5rem;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+}
+.alert .close {
+    color: #fff;
+    text-shadow: none;
+    opacity: .9;
+}
+.alert .close i {
+    font-size: 20px;
+}
+.alert .close:hover{
+    opacity: 1;
+    color: #fff;
+}
+.alert.alert-info {
+    background-color: #00cae3;
+    color: #fff;
+}
+
+.alert.alert-success {
+    background-color: #55b559;
+    color: #fff;
+}
+
+.alert.alert-warning {
+    background-color: #ff9e0f;
+    color: #fff;
+}
+
+.alert.alert-danger {
+    background-color: #f55145;
+    color: #fff;
+}
+
+.alert.alert-primary {
+    background-color: #a72abd;
+    color: #fff;
 }

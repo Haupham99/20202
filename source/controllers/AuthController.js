@@ -1,12 +1,17 @@
 import authen from "./../libs/authen";
 import cfg from "./../libs/config";
+import {validationResult} from 'express-validator/check';
+import {auth} from './../services/index';
 
-let getLoginRegister = async function (req, res) {
+let getLogin = async function (req, res) {
   const username = await authen.IsAuthenticated(req.cookies["xxxxx"]);
   if (username) {
       res.redirect("/")
   }
-  res.render("./login/login", {layout: false});
+  res.render("./login/login", {
+    errors: req.flash("errors"),
+    success: req.flash("success")
+  });
 };
 
 let getLogout = (req, res) => {
@@ -31,8 +36,44 @@ let postLogin = (req, res) => {
   }
 }
 
+let getRegister = (req, res) => {
+  res.render("./login/register", {
+    errors: req.flash("errors"),
+    success: req.flash("success")
+  });
+};
+
+let postRegister = async (req, res) => {
+  let errorArr = [];
+  let successArr = [];
+  
+  let validationErrors = validationResult(req);
+  if(!validationErrors.isEmpty()){
+    let errors = Object.values(validationErrors.mapped());
+    errors.forEach((item) => {
+      errorArr.push(item.msg);
+    });
+
+    req.flash("errors", errorArr);
+    return res.redirect('./register');
+  };
+
+  try {
+    let createUserSuccess = await auth.register(req.body["email-register"], req.body["pwd-register"]);
+    successArr.push(createUserSuccess);
+    req.flash("success", successArr);
+    return res.redirect('./login');
+  } catch (error) {
+    errorArr.push(error);
+    req.flash("errors", errorArr);
+    return res.redirect('./register');
+  }
+};
+
 module.exports = {
-  getLoginRegister: getLoginRegister,
+  getLogin: getLogin,
   getLogout: getLogout,
-  postLogin: postLogin
+  getRegister: getRegister,
+  postLogin: postLogin,
+  postRegister: postRegister
 };
