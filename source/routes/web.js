@@ -52,6 +52,8 @@ let initRoutes = (app) => {
 
     router.post("/register", authValid.register, auth.postRegister);
 
+    router.get("/verify/:token", auth.verifyAccount);
+
     router.get("/login", auth.getLogin);
     
     router.post("/login", auth.postLogin);

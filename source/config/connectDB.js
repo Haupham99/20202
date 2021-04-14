@@ -16,7 +16,7 @@ let connectDB = () => {
     let DB_PASSWORD = "";
 
     let URI = `${DB_CONNECTION}://${DB_HOST}:${DB_PORT}/${DB_NAME}`;
-    return mongoose.connect(URI, { useUnifiedTopology: true, useNewUrlParser: true });
+    return mongoose.connect(URI, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false });
 }
 
 let getUser = (email, password) => {

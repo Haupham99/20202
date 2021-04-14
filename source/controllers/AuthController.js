@@ -55,18 +55,33 @@ let postRegister = async (req, res) => {
     });
 
     req.flash("errors", errorArr);
-    return res.redirect('./register');
+    return res.redirect('/register');
   };
 
   try {
-    let createUserSuccess = await auth.register(req.body["email-register"], req.body["pwd-register"]);
+    let createUserSuccess = await auth.register(req.body["email-register"], req.body["pwd-register"], req.protocol, req.get("host"));
     successArr.push(createUserSuccess);
     req.flash("success", successArr);
-    return res.redirect('./login');
+    return res.redirect('/login');
   } catch (error) {
     errorArr.push(error);
     req.flash("errors", errorArr);
-    return res.redirect('./register');
+    return res.redirect('/register');
+  }
+};
+
+let verifyAccount = async (req, res) => {
+  let errorArr = [];
+  let successArr = [];
+  try {
+    let verifySuccess = await auth.verifyAccount(req.params.token);
+    successArr.push(verifySuccess);
+    req.flash("success", successArr);
+    return res.redirect('/login'); 
+  } catch (error) {
+    errorArr.push(error);
+    req.flash("errors", errorArr);
+    return res.redirect('/register');
   }
 };
 
@@ -75,5 +90,6 @@ module.exports = {
   getLogout: getLogout,
   getRegister: getRegister,
   postLogin: postLogin,
-  postRegister: postRegister
+  postRegister: postRegister,
+  verifyAccount: verifyAccount
 };
