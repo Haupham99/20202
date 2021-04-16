@@ -1,13 +1,9 @@
-import authen from "./../libs/authen";
+// import authen from "./../libs/authen";
 import cfg from "./../libs/config";
 import {validationResult} from 'express-validator/check';
 import {auth} from './../services/index';
 
 let getLogin = async function (req, res) {
-  const username = await authen.IsAuthenticated(req.cookies["xxxxx"]);
-  if (username) {
-      res.redirect("/")
-  }
   res.render("./login/login", {
     errors: req.flash("errors"),
     success: req.flash("success")
@@ -15,28 +11,52 @@ let getLogin = async function (req, res) {
 };
 
 let getLogout = (req, res) => {
-  res.cookie("xxxxx", "");
-  res.redirect("/");
+  req.logout(); // Remove session passport
+  return res.redirect("/login");
 };
 
-let postLogin = (req, res) => {
-  let email = req.body.email;
-  let pwd = req.body.pwd;
-  console.log(email, pwd);
-  let token = authen.GeneralJWT(pwd, email);
-  if (token) {
-      res.cookie("xxxxx", token, {
-          maxAge: 1 * 60 * 6000 * cfg.authen['expiresIn']
-      }); //token được encode thành xxxxx
-      
-      res.redirect("/index");
-      
-  } else {
-      res.redirect("/login");
-  }
-}
+// let postLogin = async (req, res) => {
+//   let email = req.body.email;
+//   let pwd = req.body.pwd;
+//   let errorArr = [];
+//   let successArr = [];
+  
+//   let validationErrors = validationResult(req);
+//   if(!validationErrors.isEmpty()){
+//     let errors = Object.values(validationErrors.mapped());
+//     errors.forEach((item) => {
+//       errorArr.push(item.msg);
+//     });
+
+//     req.flash("errors", errorArr);
+//     return res.redirect('/login');
+//   };
+
+//   try {
+//     let loginUserSuccess = await auth.login(email, pwd);
+//     successArr.push(loginUserSuccess);
+//     req.flash("success", successArr);
+//     // let token = authen.GeneralJWT(pwd, email);
+//     // console.log(token);
+//     // if (token) {
+//     //     res.cookie("xxxxx", token, {
+//     //         maxAge: 1 * 60 * 6000 * cfg.authen['expiresIn']
+//     //     }); //token được encode thành xxxxx
+        
+//     //     res.redirect("/index");
+        
+//     // } else {
+//     //     res.redirect("/login");
+//     // }
+//   } catch (error) {
+//     errorArr.push(error);
+//     req.flash("errors", errorArr);
+//     return res.redirect('/login');
+//   }
+// }
 
 let getRegister = (req, res) => {
+  res.setHeader("Content-Type", "text/html");
   res.render("./login/register", {
     errors: req.flash("errors"),
     success: req.flash("success")
@@ -85,11 +105,26 @@ let verifyAccount = async (req, res) => {
   }
 };
 
+let checkLoggedIn = (req, res, next) => {
+  if(!req.isAuthenticated()) {
+    return res.redirect("/login");
+  }
+  next();
+};
+
+let checkLoggedOut = (req, res, next) => {
+  if(req.isAuthenticated()) {
+    return res.redirect("/index");
+  }
+  next();
+}
+
 module.exports = {
   getLogin: getLogin,
   getLogout: getLogout,
   getRegister: getRegister,
-  postLogin: postLogin,
+  checkLoggedIn: checkLoggedIn,
+  checkLoggedOut: checkLoggedOut,
   postRegister: postRegister,
   verifyAccount: verifyAccount
 };

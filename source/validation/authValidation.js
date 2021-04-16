@@ -20,6 +20,15 @@ let register = [
         })
 ];
 
+let login = [
+    check("email", transValidation.email_incorrect)
+        .isEmail()
+        .trim(),
+    check("pwd", transValidation.password_incorrect)
+        .isLength({min: 8})
+]
+
 module.exports = {
-    register: register
+    register: register,
+    login: login
 };

@@ -6,6 +6,7 @@ import { reject, resolve } from 'bluebird';
 import sendMail from './../config/mailer';
 
 let saltRounds = 7;
+let salt = bcrypt.genSaltSync(saltRounds);
 
 let register = (email, password, protocol, host) => {
     return new Promise(async (resolve, reject) => {
@@ -20,7 +21,6 @@ let register = (email, password, protocol, host) => {
             return reject(transErrors.account_in_use);
         };
 
-        let salt = bcrypt.genSaltSync(saltRounds);
         let userItem = {
             username: email.split("@")[0],
             email: email,
@@ -55,7 +55,27 @@ let verifyAccount = (token) => {
     });
 };
 
+let login = (email, password) => {
+    return new Promise(async (resolve, reject) => {
+        let userByEmail = await UserModel.findByEmail(email);
+        let pass = bcrypt.hashSync(password, salt);
+        if(userByEmail != null){
+            // console.log(userByEmail);
+            if(userByEmail.deletedAt != null){
+                return reject(transErrors.account_removed);
+            }else if(!userByEmail.isActive){
+                return reject(transErrors.account_not_active);
+            }else if(bcrypt.compareSync(pass, userByEmail.password)){
+                return reject(transErrors.account_wrong_password);
+            }
+            resolve();
+        }
+        return reject(transErrors.account_not_found);
+    });
+};
+
 module.exports = {
     register: register,
-    verifyAccount: verifyAccount
+    verifyAccount: verifyAccount,
+    login: login
 };
