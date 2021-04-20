@@ -50,10 +50,10 @@
                         <li class="nav-item dropdown">
                         <a style="padding: 0;" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            <img src="images/<%= user.avatar %>" width="60" height="60" class="rounded-circle">
-                           <p style="margin: 0; padding: 0; color: black">Hau Pham</p>
+                           <p style="margin: 0; padding: 0; color: black"><%= user.username %></p>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                           <a class="dropdown-item" href="#">Edit Profile</a>
+                           <a class="dropdown-item" href="/profile">Edit Profile</a>
                            <a class="dropdown-item" href="/logout">Log Out</a>
                         </div>
                         </li>   
