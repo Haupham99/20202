@@ -8,7 +8,7 @@ let UserSchema = new Schema({
     lastname: String,
     username: String,
     birthday: String,
-    avatar: String,
+    avatar: {type: String, default: "default.jpg"},
     class: String,
     // gender: {type: String, default: "male"},
     phone: {type: Number, default: null},

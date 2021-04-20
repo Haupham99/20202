@@ -1,5 +1,5 @@
 import express from "express";
-import {home, auth} from "./../controllers/index";
+import {home, auth, profile} from "./../controllers/index";
 import UserModel from './../models/user.model';
 import {authValid} from './../validation/index';
 import passport from "passport";
@@ -63,12 +63,13 @@ let initRoutes = (app) => {
         res.render("./student/notification");
     });
     
-    router.get("/profile", async function (req, res) {
-        res.setHeader("Content-Type", "text/html");
-        res.render("./student/profile");
-    });
-    
+    // router.get("/profile", async function (req, res) {
+    //     res.setHeader("Content-Type", "text/html");
+    //     res.render("./student/profile");
+    // });
 
+    router.get("/profile", auth.checkLoggedIn, profile.getProfile);
+    
     return app.use("/", router);
 };
 

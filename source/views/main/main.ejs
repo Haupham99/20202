@@ -34,7 +34,6 @@
          .bg-custom-2 {
          background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
          }
-        }
     </style>
    </head>
    <body>
@@ -50,7 +49,7 @@
                      <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                         <a style="padding: 0;" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           <img src="images/pic_1.jpg" width="60" height="60" class="rounded-circle">
+                           <img src="images/<%= user.avatar %>" width="60" height="60" class="rounded-circle">
                            <p style="margin: 0; padding: 0; color: black">Hau Pham</p>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -75,7 +74,7 @@
                <div class="clr"></div>
                <div class="menu_nav">
                   <ul>
-                     <li class="tab-home"><a href="./">Trang chủ</a></li>
+                     <li class="tab-home"><a href="./index">Trang chủ</a></li>
                      <li class="tab-group-class"><a href="./group-class">Nhóm lớp</a></li>
                      <li class="tab-chat"><a href="./chat">Nói chuyện</a></li>
                      <li class="tab-notification"><a href="./notification">Thông báo</a></li>

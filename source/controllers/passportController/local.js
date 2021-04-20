@@ -16,32 +16,32 @@ let initPassportLocal = () => {
         passReqToCallback: true
     }, async (req, email, password, done) => {
         try {
-            let userByEmail = await UserModel.findByEmail(email);
+            let user = await UserModel.findByEmail(email);
             // let pass = bcrypt.hashSync(password, salt);
-            if(userByEmail != null){
-                // console.log(userByEmail);
-                if(userByEmail.deletedAt != null){
+            if(user != null){
+                // console.log(user);
+                if(user.deletedAt != null){
                     return done(null, false, req.flash("errors", transErrors.account_removed));
-                }else if(!userByEmail.isActive){
+                }else if(!user.isActive){
                     return done(null, false, req.flash("errors", transErrors.account_not_active));
                 }
-                let checkPassword = await userByEmail.comparePassword(password);
+                let checkPassword = await user.comparePassword(password);
                 // console.log(checkPassword);
                 if(!checkPassword){
                     return done(null, false, req.flash("errors", transErrors.account_wrong_password));
                 }
-                return done(null, userByEmail);
+                return done(null, user);
             }
             console.log("Dang nhap thanh cong!");
-            return done(null, userByEmail, req.flash("errors", transErrors.account_not_found));
+            return done(null, user, req.flash("errors", transErrors.account_not_found));
         } catch (error) {
             console.log(error);
             return done(null, false, req.flash("errors", transErrors.server_error));
         }
     }));
     // Save UserId to session
-    passport.serializeUser((userByEmail, done) => {
-        done(null, userByEmail._id);
+    passport.serializeUser((user, done) => {
+        done(null, user._id);
     });
 
     passport.deserializeUser((id, done) => {
