@@ -6,6 +6,15 @@ let getProfile = function (req, res) {
     });
 };
 
+let getChangePassword = function (req, res) {
+  res.render("./student/change-password", {
+    errors: req.flash("errors"),
+    success: req.flash("success"),
+    user: req.user
+  });
+};
+
 module.exports = {
-    getProfile: getProfile
+    getProfile: getProfile,
+    getChangePassword: getChangePassword
 };

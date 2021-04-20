@@ -1,5 +1,5 @@
 import express from "express";
-import {home, auth, profile} from "./../controllers/index";
+import {home, auth, profile, user} from "./../controllers/index";
 import UserModel from './../models/user.model';
 import {authValid} from './../validation/index';
 import passport from "passport";
@@ -47,6 +47,12 @@ let initRoutes = (app) => {
     }));
 
     router.get("/logout", auth.checkLoggedIn, auth.getLogout);
+
+    router.post("/user/update-avatar", auth.checkLoggedIn, user.updateAvatar);
+
+    router.get("/change-password", auth.checkLoggedIn, profile.getChangePassword);
+
+    router.post("/change-password", auth.checkLoggedIn, user.updatePassword);
     
     router.get("/chat", async function (req, res) {
         res.setHeader("Content-Type", "text/html");
