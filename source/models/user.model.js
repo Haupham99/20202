@@ -49,6 +49,14 @@ UserSchema.statics = {
 
     findUserById(id) {
         return this.findById(id).exec();
+    },
+
+    updateUser(id, item){
+        return this.findByIdAndUpdate(id, item).exec(); //return old item after updated
+    },
+
+    updatePassword(id, password){
+        return this.findByIdAndUpdate(id, {password: password, updatedAt: Date.now()}).exec();
     }
 };
 

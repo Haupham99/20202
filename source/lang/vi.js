@@ -10,7 +10,12 @@ export const transErrors = {
     token_undefined: "Token không tồn tại!",
     account_not_found: "Email chưa được đăng ký",
     account_wrong_password: "Mật khẩu không chính xác",
-    server_error: "Server falied!"
+    server_error: "Server falied!",
+    avatar_type: "Kiểu file không hợp lệ, chỉ chấp nhận file png, jpg, jpeg",
+    avatar_update_failed: "Cập nhật thất bại",
+    old_password_incorrect: "Mật khẩu cũ không chính xác",
+    new_password_not_changed: "Mật khẩu mới không được trùng với mật khẩu cũ",
+    confirm_password_wrong: "Mật khẩu mới không khớp"
 };
 
 export const transSuccess = {
@@ -18,7 +23,9 @@ export const transSuccess = {
         return `Tài khoản <strong>${userEmail}</strong> đã được tạo, vui lòng kiểm tra email để active tài khoản.`;
     },
     account_actived: "Kích hoạt tài khoản thành công, bạn đã có thể đăng nhập vào ứng dụng.",
-    account_login: "Đăng nhập thành công"
+    account_login: "Đăng nhập thành công",
+    avatar_updated: "Cập nhật thành công",
+    password_updated: "Cập nhật mật khẩu thành công"
 };
 
 export const transMail = {
