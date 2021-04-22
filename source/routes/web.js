@@ -1,5 +1,5 @@
 import express from "express";
-import {home, auth, profile, user} from "./../controllers/index";
+import {home, auth, profile, user, personal} from "./../controllers/index";
 import UserModel from './../models/user.model';
 import {authValid} from './../validation/index';
 import passport from "passport";
@@ -76,6 +76,11 @@ let initRoutes = (app) => {
 
     router.get("/profile", auth.checkLoggedIn, profile.getProfile);
     
+    // Personal Page
+    router.get("/personal", auth.checkLoggedIn, personal.getPersonal);
+    // router.post("/personal/post-post", auth.checkLoggedIn, personal.postPost);
+    router.post("/personal/post-post", personal.postPost);
+
     return app.use("/", router);
 };
 

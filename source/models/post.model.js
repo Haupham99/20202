@@ -11,6 +11,7 @@ let PostSchema = new Schema({
     image1: String, 
     image2: String,
     image3: String,
+    image4: String,
     video: String,
     isLiked: {type: Boolean, default: false},
     likes: {type: Number, default: 0},
@@ -20,5 +21,15 @@ let PostSchema = new Schema({
     updatedAt: {type: Number, default: null},
     deletedAt: {type: Number, default: null}
 });
+
+PostSchema.statics = {
+    createNew(item) {
+        return this.create(item);
+    },
+    
+    findByUserId(userId){
+        return this.find({userId: userId}).sort({createdAt: -1}).exec(); // Find one post
+    }
+};
 
 module.exports = mongoose.model("post", PostSchema);

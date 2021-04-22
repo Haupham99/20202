@@ -31,9 +31,7 @@ let updateAvatar = (req, res) => {
             console.log(error);
             return;
         }
-        // console.log(req.file);
         try {
-            // console.log(req.file);
             if(req.file != undefined){
                 var updateUserItem = {
                     avatar: req.file.filename,
@@ -50,7 +48,6 @@ let updateAvatar = (req, res) => {
             }
             // Update user
             let userUpdate = await user.updateUser(req.user._id, updateUserItem);
-            // console.log(userUpdate);
             // Remove old user avatar
             // await fsExtra.remove(`${app.avatar_directory}/${req.file.filename}`);
             // let result = {
@@ -75,7 +72,6 @@ let updatePassword = async (req, res) => {
         // let newPassword = req.body["new-password"];
         // let confirmPassword = req.body["confirm-password"];
         let data = req.body;
-        console.log(data);
         let result = await user.updatePassword(req, req.user._id, data); 
         res.redirect("/change-password");
     } catch (error) {
