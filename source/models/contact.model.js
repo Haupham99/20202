@@ -14,7 +14,42 @@ let ContactSchema = new Schema({
 ContactSchema.statics = {
     createNew(item) {
         return this.create(item);
-    }
+    },
+    
+    findRequestByUserId(userId){
+        return this.find({contactId: userId, status: false}).sort({createdAt: -1}).exec(); // Find one post
+    },
+
+    findByUserId(userId){
+        return this.find({userId: userId, status: true}).sort({createdAt: -1}).exec(); // Find one post
+    },
+
+    findByContactId(contactId){
+        return this.find({contactId: contactId, status: true}).sort({createdAt: -1}).exec(); // Find one post
+    },
+
+    acceptFriend(userId, contactId){
+        return this.findOneAndUpdate(
+            {userId: userId, contactId: contactId},
+            {status: true}
+        ).exec();
+    },
+
+    refuseAcceptFriend(userId, contactId){
+        return this.deleteOne(
+            {userId: userId, contactId: contactId, status: false}
+        ).exec();
+    },
+
+    cancelFriend(userId, contactId){
+        this.deleteOne(
+            {userId: contactId, contactId: userId, status: true}
+        ).exec();
+        this.deleteOne(
+            {userId: userId, contactId: contactId, status: true}
+        ).exec();
+        return;
+    },
 };
 
 module.exports = mongoose.model("contact", ContactSchema);

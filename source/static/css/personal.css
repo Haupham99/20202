@@ -357,7 +357,7 @@ header
 
 #l-col
 {
-    width: 340px;
+    width: 235px;
     padding-top: 6px;
 }
 
@@ -1031,9 +1031,9 @@ header
 .on-ct
 {
     position: relative;
-    width: 50px;
-    height: 50px;
-    margin: 28px auto 0 auto;
+    width: 100px;
+    height: 100px;
+    margin: 28px auto 0 10px;
     border-radius: 50%;
 }
 
@@ -1121,4 +1121,24 @@ header
 .display-img {
     width: 200px;
     height: 200px;
+    border-radius: 30%;
+    border: 1px solid red;
+    margin: 5px;
 }
+
+.liked {
+    border: 2px solid blue;
+}
+
+a {
+    text-decoration: none!important;
+}
+
+a.a-none {
+    text-decoration: none;
+}
+
+a:visited {
+    color: #919191;
+}
+

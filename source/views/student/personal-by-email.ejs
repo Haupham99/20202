@@ -1,5 +1,5 @@
 <% extend("./../main/main") %>
-<script type="text/javascript" src="js/pvhau/personal.js"></script>
+<script type="text/javascript" src="js/pvhau/personalByEmail.js"></script>
 <script>
    
 </script>
@@ -7,22 +7,13 @@
 <main>
    <div id="profile-upper">
       <div id="profile-banner-image">
-         <img src="images/<%= user.coverAvatar %>" alt="Banner image">
+         <img src="images/<%= userByEmail.coverAvatar %>" alt="Banner image">
       </div>
       <div id="profile-d">
          <div id="profile-pic">
-            <img src="images/<%= user.avatar %>">    
+            <img src="images/<%= userByEmail.avatar %>">    
          </div>
-         <div id="u-name"><%= user.username %></div>
-         <div class="tb" id="m-btns">
-            <div class="td">
-               <div class="m-btn"><i class="material-icons">format_list_bulleted</i><span>Activity log</span></div>
-            </div>
-            <div class="td">
-               <div class="m-btn"><i class="material-icons">lock</i><span>Privacy</span></div>
-            </div>
-         </div>
-         <div id="edit-profile"><i class="material-icons">camera_alt</i></div>
+         <div id="u-name"><%= userByEmail.username %></div>
       </div>
       <div id="black-grd"></div>
    </div>
@@ -98,16 +89,16 @@
                <div class="td">
                   <div class="tb" id="p-tabs-m">
                      <div class="td active"><i class="material-icons">av_timer</i><span>TIMELINE</span></div>
-                     <div class="td"><a href="/friend" class="a-none"><i class="material-icons">people</i><span>FRIENDS</span></a></div>
+                     <!-- <div class="td"><a href="/friend" class="a-none"><i class="material-icons">people</i><span>FRIENDS</span></a></div>
                      <div class="td"><i class="material-icons">photo</i><span>PHOTOS</span></div>
                      <div class="td"><i class="material-icons">explore</i><span>ABOUT</span></div>
-                     <div class="td"><i class="material-icons">archive</i><span>ARCHIVE</span></div>
+                     <div class="td"><i class="material-icons">archive</i><span>ARCHIVE</span></div> -->
                   </div>
                </div>
-               <div class="td" id="p-tab-m"><i class="material-icons">keyboard_arrow_down</i></div>
+               <!-- <div class="td" id="p-tab-m"><i class="material-icons">keyboard_arrow_down</i></div> -->
             </div>
          </div>
-         <div class="m-mrg" id="composer">
+         <!-- <div class="m-mrg" id="composer">
             <div id="c-tabs-cvr" style="margin-bottom: 10px;">
                <div class="tb" id="c-tabs">
                   <div class="td active"><i class="material-icons">subject</i><span>Make Post</span></div>
@@ -116,45 +107,13 @@
                   <div class="td"><i class="material-icons">event</i><span>Life Event</span></div>
                </div>
             </div>
-            <form action="/personal/post-post" method="post">
-               <div id="img-arr">
-                  <div class="transbox img-grid">
-                     <textarea style="display: none;" name="image1" id="image1" cols="30" rows="10"></textarea>
-                     <img src="" id="img1"/>
-                  </div>
-                  <div class="transbox img-grid">
-                     <textarea style="display: none;" name="image2" id="image2" cols="30" rows="10"></textarea>
-                     <img src="" id="img2"/>
-                  </div>
-                  <div class="transbox img-grid">
-                     <textarea style="display: none;" name="image3" id="image3" cols="30" rows="10"></textarea>
-                     <img src="" id="img3"/>
-                  </div>
-                  <div class="transbox img-grid">
-                     <textarea style="display: none;" name="image4" id="image4" cols="30" rows="10"></textarea>
-                     <img src="" id="img4"/>
-                  </div>
-               </div>
-               <div id="c-c-main">
-                  <div class="tb" style="margin-top: 10px;">
-                     <div class="td" id="p-c-i"><img src="images/<%= user.avatar %>" alt="Profile pic"></div>
-                     <div class="td" id="c-inp">
-                        <textarea name="description" class="textarea-make-post" type="text"></textarea>
-                     </div>
-                  </div>
-                  <div id="insert_emoji">
-                     <button class="btn btn-success">Đăng</button>
-                     <i class="material-icons">insert_emoticon</i>
-                  </div>
-               </div>
-            </form>
-         </div>
+         </div> -->
          <div>
             <% if(postArr != undefined) { %>
             <% postArr.forEach((item) => { %>
             <div class="post">
                <div class="tb">
-                  <a href="/<%= item.email %>" class="td p-p-pic"><img src="images/<%= user.avatar %>" alt="images/<%= user.avatar %>"></a>
+                  <a href="/<%= item.email %>" class="td p-p-pic"><img src="images/<%= userByEmail.avatar %>" alt="images/<%= userByEmail.avatar %>"></a>
                   <div class="td p-r-hdr">
                      <div class="p-u-info">
                         <a href="/<%= item.email %>"><%= item.username %></a> 
@@ -202,26 +161,6 @@
                         </div>
                      </div>
                   </div>
-                  <!-- <% if(item.image1 != undefined) { %>
-                     <div class="img-grid">
-                        <img src="images/<%= item.image1 %>"/>
-                     </div>
-                  <% } %>
-                  <% if(item.image2 != undefined) { %>
-                     <div class="img-grid">
-                        <img src="images/<%= item.image2 %>"/>
-                     </div>
-                  <% } %>
-                  <% if(item.image3 != undefined) { %>
-                     <div class="img-grid">
-                        <img src="images/<%= item.image3 %>"/>
-                     </div>
-                  <% } %>
-                  <% if(item.image4 != undefined) { %>
-                     <div class="img-grid">
-                        <img src="images/<%= item.image4 %>"/>
-                     </div>
-                  <% } %> -->
                   <div>
                      <div class="p-acts">
                         <div class="p-act like"><i class="fas fa-thumbs-up"></i><span><%= item.likes  %></span><p style="display: none;"><%= item._id %></p><h1 style="display: none;"><%= item.userId %></h1></div>

@@ -1,5 +1,5 @@
 import express from "express";
-import {home, auth, profile, user, personal} from "./../controllers/index";
+import {home, auth, profile, user, personal, friend, chat} from "./../controllers/index";
 import UserModel from './../models/user.model';
 import {authValid} from './../validation/index';
 import passport from "passport";
@@ -54,10 +54,7 @@ let initRoutes = (app) => {
 
     router.post("/change-password", auth.checkLoggedIn, user.updatePassword);
     
-    router.get("/chat", async function (req, res) {
-        res.setHeader("Content-Type", "text/html");
-        res.render("./student/chat");
-    });
+    router.get("/chat", auth.checkLoggedIn, chat.getChat);
     
     router.get("/group-class", async function (req, res) {
         res.setHeader("Content-Type", "text/html");
@@ -76,10 +73,19 @@ let initRoutes = (app) => {
 
     router.get("/profile", auth.checkLoggedIn, profile.getProfile);
     
+    // Friend
+    router.get("/friend", auth.checkLoggedIn, friend.getFriend);
+    router.get("/friend-request/:userId", friend.getFriendRequest);
+    router.get("/friend-suggest/:userId", friend.getFriendSuggest);
+    router.post("/accept-friend/:userId/:contactId", friend.postAcceptFriend);
+    router.post("/refuse-accept-friend/:userId/:contactId", friend.postRefuseAcceptFriend);
+    router.post("/cancel-friend/:userId/:contactId", friend.postCancelFriend);
+
     // Personal Page
     router.get("/personal", auth.checkLoggedIn, personal.getPersonal);
-    // router.post("/personal/post-post", auth.checkLoggedIn, personal.postPost);
-    router.post("/personal/post-post", personal.postPost);
+    router.post("/personal/post-post", auth.checkLoggedIn, personal.postPost);
+    router.post("/personal/post/:postId/:userId/:userIdPost/:like", personal.likePost);
+    router.get("/:email", auth.checkLoggedIn, personal.getPersonalById);
 
     return app.use("/", router);
 };
