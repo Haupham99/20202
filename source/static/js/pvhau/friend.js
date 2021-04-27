@@ -99,7 +99,7 @@ $("document").ready(function(){
         // console.log("Clicked");
         let contactId = sessionStorage.getItem("userId");
         let userId = a.parents().eq(3).find("p.accept-friend").text();
-        console.log(userId, contactId);
+        // console.log(userId, contactId);
         $.ajax({
 
             // url: "/personal/post/:postId/:userId/:userIdPost/:like",
@@ -123,10 +123,10 @@ $("document").ready(function(){
     $(document).off('click', "button.exampleModal2").on('click', "button.exampleModal2", function(e) {
         let a = $(this);
         $(document).off('click', ".refuse-accept-friend").on('click', ".refuse-accept-friend", function(e) {
-            console.log("Refuse!");
+            // console.log("Refuse!");
             let contactId = sessionStorage.getItem("userId");
             let userId = a.parents().eq(3).find("p.accept-friend").text();
-            console.log(userId, contactId);
+            // console.log(userId, contactId);
             $.ajax({
                 // url: "/personal/post/:postId/:userId/:userIdPost/:like",
                 url: "/refuse-accept-friend/" + userId + "/" + contactId,
@@ -153,9 +153,9 @@ $("document").ready(function(){
             // console.log("Refuse!");
             let contactId = sessionStorage.getItem("userId");
             let userId = a.parents().eq(3).find("p.list-friend").text().trim();
-            console.log("userId: ", userId);
-            console.log("contactId: ", contactId);
-            console.log(a.parents().eq(0).find('a button.profile-success').text());
+            // console.log("userId: ", userId);
+            // console.log("contactId: ", contactId);
+            // console.log(a.parents().eq(0).find('a button.profile-success').text());
             $.ajax({
                 // url: "/personal/post/:postId/:userId/:userIdPost/:like",
                 url: "/cancel-friend/" + userId + "/" + contactId,
@@ -216,7 +216,7 @@ $("document").ready(function(){
     $(document).off('click', "button.exampleModal3").on('click', "button.exampleModal3", function(e) {
         let a = $(this);
         $(document).off('click', ".refuse-suggest-friend").on('click', ".refuse-suggest-friend", function(e) {
-            console.log("Refuse suggest!");
+            // console.log("Refuse suggest!");
             $(document).off('click', a.parents().eq(0).find('button.send-friend-request'));
             a.parents().eq(0).find('button.send-friend-request').text("Gửi lại lời mời");
             a.remove();
