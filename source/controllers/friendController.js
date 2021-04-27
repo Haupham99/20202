@@ -17,7 +17,7 @@ let getFriendRequest = async function(req, res) {
 
 let getFriendSuggest = async function(req, res) {
     let friendArr = await friend.getFriendSuggest(req, res, req.params.userId, req.params.contactId);
-    res.status(200).send({"message": "success"});
+    res.status(200).send({"data": friendArr});
 };
 
 let postAcceptFriend = async function(req, res) {
@@ -33,7 +33,12 @@ let postRefuseAcceptFriend = async function(req, res) {
 let postCancelFriend = async function(req, res) {
     let friendArr = await friend.postCancelFriend(req, res, req.params.userId, req.params.contactId);
     res.status(200).send({"message": "success"});
-}
+};
+
+let postFriendRequest = async function(req, res) {
+    let friendArr = await friend.postFriendRequest(req, res, req.params.userId, req.params.contactId);
+    res.status(200).send({"message": "success"});
+};
 
 module.exports = {
     getFriend: getFriend,
@@ -41,5 +46,6 @@ module.exports = {
     getFriendSuggest: getFriendSuggest,
     postAcceptFriend: postAcceptFriend,
     postRefuseAcceptFriend: postRefuseAcceptFriend,
-    postCancelFriend: postCancelFriend
+    postCancelFriend: postCancelFriend,
+    postFriendRequest: postFriendRequest
 };

@@ -77,6 +77,7 @@ let initRoutes = (app) => {
     router.get("/friend", auth.checkLoggedIn, friend.getFriend);
     router.get("/friend-request/:userId", friend.getFriendRequest);
     router.get("/friend-suggest/:userId", friend.getFriendSuggest);
+    router.post("/send-friend-request/:userId/:contactId", friend.postFriendRequest);
     router.post("/accept-friend/:userId/:contactId", friend.postAcceptFriend);
     router.post("/refuse-accept-friend/:userId/:contactId", friend.postRefuseAcceptFriend);
     router.post("/cancel-friend/:userId/:contactId", friend.postCancelFriend);

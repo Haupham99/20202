@@ -20,12 +20,12 @@ ContactSchema.statics = {
         return this.find({contactId: userId, status: false}).sort({createdAt: -1}).exec(); // Find one post
     },
 
-    findByUserId(userId){
-        return this.find({userId: userId, status: true}).sort({createdAt: -1}).exec(); // Find one post
+    findByUserId(userId, status){
+        return this.find({userId: userId, status: status}).sort({createdAt: -1}).exec(); // Find one post
     },
 
-    findByContactId(contactId){
-        return this.find({contactId: contactId, status: true}).sort({createdAt: -1}).exec(); // Find one post
+    findByContactId(contactId, status){
+        return this.find({contactId: contactId, status: status}).sort({createdAt: -1}).exec(); // Find one post
     },
 
     acceptFriend(userId, contactId){
