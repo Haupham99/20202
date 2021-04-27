@@ -107,12 +107,12 @@ $("document").ready(function(){
             type: "POST",
             contentType: false,
             success: function(result){
-                $(document).off('click', a);
+                a.removeClass("accept-friend");
                 a.text("Bạn bè");
                 a.parents().eq(0).find(".exampleModal2").remove();
             },
             error: function(result){
-                $(document).off('click', a);
+                a.removeClass("accept-friend");
                 a.text("Bạn bè");
                 a.parents().eq(0).find(".exampleModal2").remove();
             },
@@ -133,13 +133,13 @@ $("document").ready(function(){
                 type: "POST",
                 contentType: false,
                 success: function(result){
-                    $(document).off('click', a.parents().eq(0).find('button.accept-friend'));
                     a.parents().eq(0).find('button.accept-friend').text("Đã từ chối lời mời");
+                    a.parents().eq(0).find('button.accept-friend').removeClass("accept-friend");
                     a.remove();
                 },
                 error: function(result){
-                    $(document).off('click', a.parents().eq(0).find('button.accept-friend'));
                     a.parents().eq(0).find('button.accept-friend').text("Đã từ chối lời mời");
+                    a.parents().eq(0).find('button.accept-friend').removeClass("accept-friend");
                     a.remove();
                 },
             });
@@ -162,7 +162,7 @@ $("document").ready(function(){
                 type: "POST",
                 contentType: false,
                 success: function(result){
-                    $(document).off('click', a);
+                    a.removeClass("exampleModal1");
                     a.parents().eq(0).find('a button.profile-success').parents().eq(0).attr("href", "#");
                     a.parents().eq(0).find('a button.profile-success').parents().eq(0).click(function(e) {
                         e.preventDefault();
@@ -172,7 +172,7 @@ $("document").ready(function(){
                     a.remove();
                 },
                 error: function(result){
-                    $(document).off('click', a);
+                    a.removeClass("exampleModal1");
                     a.parents().eq(0).find('a button.profile-success').parents().eq(0).attr("href", "#");
                     a.parents().eq(0).find('a button.profile-success').parents().eq(0).click(function(e) {
                         e.preventDefault();
@@ -200,12 +200,12 @@ $("document").ready(function(){
             type: "POST",
             contentType: false,
             success: function(result){
-                $(document).off('click', a);
+                a.removeClass("send-friend-request");
                 a.text("Đã gửi lời mời kết bạn");
                 a.parents().eq(0).find(".exampleModal3").remove();
             },
             error: function(result){
-                $(document).off('click', a);
+                a.removeClass("send-friend-request");
                 a.text("Đã gửi lời mời kết bạn");
                 a.parents().eq(0).find(".exampleModal3").remove();
             },
@@ -217,8 +217,8 @@ $("document").ready(function(){
         let a = $(this);
         $(document).off('click', ".refuse-suggest-friend").on('click', ".refuse-suggest-friend", function(e) {
             // console.log("Refuse suggest!");
-            $(document).off('click', a.parents().eq(0).find('button.send-friend-request'));
-            a.parents().eq(0).find('button.send-friend-request').text("Gửi lại lời mời");
+            a.parents().eq(0).find('button.send-friend-request').text("Đã xóa đề nghị kết bạn");
+            a.parents().eq(0).find('button.send-friend-request').removeClass("send-friend-request");
             a.remove();
         });
     });
