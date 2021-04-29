@@ -34,6 +34,10 @@ PostSchema.statics = {
 
     likePost(id, data){
         return this.findByIdAndUpdate(id, data).exec();
+    },
+
+    commentPost(id){
+        return this.findByIdAndUpdate(id, {$inc : {'comments' : 1}}).exec();
     }
 };
 

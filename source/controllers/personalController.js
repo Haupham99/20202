@@ -1,8 +1,15 @@
-import {personal} from "./../services/index";
+import {personal, comment} from "./../services/index";
 import UserModel from './../models/user.model';
 
 let getPersonal = async function(req, res) {
-    let postArr = await personal.getPost(req, req.user._id)
+    let postArr = await personal.getPost(req, req.user._id);
+    for(let i = 0; i < postArr.length; i++){
+        // console.log(postArr[i]._id);
+        let comments = await comment.getComment(req, res, postArr[i]._id)
+        // console.log(comments);
+        postArr[i].commentList = comments;
+        // console.log(postArr[i].commentList);
+    }
     res.render("./student/personal", {
         errors: req.flash("errors"),
         success: req.flash("success"),
@@ -16,6 +23,15 @@ let getPersonalById = async function(req, res){
         let email = req.params.email + "@gmail.com";
         let userByEmail = await UserModel.findByEmail(email);
         let postArr = await personal.getPost(req, userByEmail._id);
+        // console.log(postArr[1]);
+        for(let i = 0; i < postArr.length; i++){
+            // console.log(postArr[i]._id);
+            let comments = await comment.getComment(req, res, postArr[i]._id)
+            // console.log(comments);
+            postArr[i].commentList = comments;
+            // console.log(postArr[i].commentList);
+        }
+        // console.log("---------");
         res.render("./student/personal-by-email", {
             errors: req.flash("errors"),
             success: req.flash("success"),

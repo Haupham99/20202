@@ -9,9 +9,19 @@ let CommentSchema = new Schema({
     username: String,
     avatar: String,
     comment: String,
+    email: String,
     createdAt: {type: Number, default: Date.now},
     updatedAt: {type: Number, default: null},
     deletedAt: {type: Number, default: null}
 });
+
+CommentSchema.statics = {
+    createNew(item) {
+        return this.create(item);
+    },
+    getCommentByPostId(postId) {
+        return this.find({postId: postId}).exec();
+    }
+};
 
 module.exports = mongoose.model("comment", CommentSchema);

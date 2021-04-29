@@ -1,8 +1,6 @@
 <% extend("./../main/main") %>
 <script type="text/javascript" src="js/pvhau/personalByEmail.js"></script>
-<script>
-   
-</script>
+<script type="text/javascript" src="js/pvhau/personalGeneral.js"></script>
 <link href="css/personal.css" rel="stylesheet" type="text/css" />
 <main>
    <div id="profile-upper">
@@ -90,9 +88,9 @@
                   <div class="tb" id="p-tabs-m">
                      <div class="td active"><i class="material-icons">av_timer</i><span>TIMELINE</span></div>
                      <!-- <div class="td"><a href="/friend" class="a-none"><i class="material-icons">people</i><span>FRIENDS</span></a></div>
-                     <div class="td"><i class="material-icons">photo</i><span>PHOTOS</span></div>
-                     <div class="td"><i class="material-icons">explore</i><span>ABOUT</span></div>
-                     <div class="td"><i class="material-icons">archive</i><span>ARCHIVE</span></div> -->
+                        <div class="td"><i class="material-icons">photo</i><span>PHOTOS</span></div>
+                        <div class="td"><i class="material-icons">explore</i><span>ABOUT</span></div>
+                        <div class="td"><i class="material-icons">archive</i><span>ARCHIVE</span></div> -->
                   </div>
                </div>
                <!-- <div class="td" id="p-tab-m"><i class="material-icons">keyboard_arrow_down</i></div> -->
@@ -107,72 +105,125 @@
                   <div class="td"><i class="material-icons">event</i><span>Life Event</span></div>
                </div>
             </div>
-         </div> -->
+            </div> -->
          <div>
             <% if(postArr != undefined) { %>
             <% postArr.forEach((item) => { %>
-            <div class="post">
-               <div class="tb">
-                  <a href="/<%= item.email %>" class="td p-p-pic"><img src="images/<%= userByEmail.avatar %>" alt="images/<%= userByEmail.avatar %>"></a>
-                  <div class="td p-r-hdr">
-                     <div class="p-u-info">
-                        <a href="/<%= item.email %>"><%= item.username %></a> 
+            <p style="display: none;"><%= item.id %></p>
+            <div>
+               <div class="post">
+                  <div class="tb">
+                     <a href="/<%= item.email %>" class="td p-p-pic"><img src="images/<%= userByEmail.avatar %>" alt="images/<%= userByEmail.avatar %>"></a>
+                     <div class="td p-r-hdr">
+                        <div class="p-u-info">
+                           <a href="/<%= item.email %>"><%= item.username %></a> 
+                        </div>
+                        <div class="p-dt">
+                           <i class="material-icons">calendar_today</i>
+                           <span>
+                           <% if (Math.ceil((Date.now() - item.createdAt)/3600000) > 24) {%>
+                           <%- Math.ceil((Date.now() - item.createdAt)/3600000/24) %> days ago 
+                           <% } else if (Math.ceil((Date.now() - item.createdAt)/3600000) == 1){ %>
+                           Vừa xong
+                           <% } else { %>
+                           <%- Math.ceil((Date.now() - item.createdAt)/3600000) %> h ago %>
+                           <% } %>
+                           </span>
+                        </div>
                      </div>
-                     <div class="p-dt">
-                        <i class="material-icons">calendar_today</i>
-                        <span>
-                        <% if (Math.ceil((Date.now() - item.createdAt)/3600000) > 24) {%>
-                        <%- Math.ceil((Date.now() - item.createdAt)/3600000/24) %> days ago 
-                        <% } else if (Math.ceil((Date.now() - item.createdAt)/3600000) == 1){ %>
-                        Vừa xong
-                        <% } else { %>
-                        <%- Math.ceil((Date.now() - item.createdAt)/3600000) %> h ago %>
-                        <% } %>
-                        </span>
-                     </div>
+                     <div class="td p-opt"><i class="material-icons">keyboard_arrow_down</i></div>
                   </div>
-                  <div class="td p-opt"><i class="material-icons">keyboard_arrow_down</i></div>
-               </div>
-               <div style="margin-top: 20px;">
-                  <%= item.description %></p>
-                  <div class="tb" style="margin-bottom: 20px;">
-                     <div class="tr">
-                        <div class="td">
-                           <% if(item.image1 != '') { %>
+                  <div style="margin-top: 20px;">
+                     <%= item.description %></p>
+                     <div class="tb" style="margin-bottom: 20px;">
+                        <div class="tr">
+                           <div class="td">
+                              <% if(item.image1 != '') { %>
                               <img src="images/<%= item.image1 %>" class="display-img"/>
-                           <% } %>
-                        </div>
-                        <div class="td">
-                           <% if(item.image2 != '') { %>
+                              <% } %>
+                           </div>
+                           <div class="td">
+                              <% if(item.image2 != '') { %>
                               <img src="images/<%= item.image2 %>" class="display-img"/>
-                           <% } %>
+                              <% } %>
+                           </div>
                         </div>
-                     </div>
-                     <div class="tr">
-                        <div class="td">
-                           <% if(item.image3 != '') { %>
+                        <div class="tr">
+                           <div class="td">
+                              <% if(item.image3 != '') { %>
                               <img src="images/<%= item.image3 %>" class="display-img"/>
-                           <% } %>
-                        </div>
-                        <div class="td">
-                           <% if(item.image4 != '') { %>
+                              <% } %>
+                           </div>
+                           <div class="td">
+                              <% if(item.image4 != '') { %>
                               <img src="images/<%= item.image4 %>" class="display-img"/>
-                           <% } %>
+                              <% } %>
+                           </div>
                         </div>
                      </div>
-                  </div>
-                  <div>
-                     <div class="p-acts">
-                        <div class="p-act like"><i class="fas fa-thumbs-up"></i><span><%= item.likes  %></span><p style="display: none;"><%= item._id %></p><h1 style="display: none;"><%= item.userId %></h1></div>
-                        <div class="p-act comment"><i class="material-icons">comment</i><span><%= item.comments  %></span></div>
-                        <div class="p-act share"><i class="material-icons">reply</i></div>
+                     <div>
+                        <div class="p-acts">
+                           <div class="p-act like">
+                              <i class="fas fa-thumbs-up"></i><span><%= item.likes  %></span>
+                              <p style="display: none;"><%= item._id %></p>
+                              <h1 style="display: none;"><%= item.userId %></h1>
+                           </div>
+                           <div class="p-act comment"><i class="material-icons">comment</i><span><%= item.comments  %></span></div>
+                           <div class="p-act share"><i class="material-icons">reply</i></div>
+                        </div>
                      </div>
                   </div>
                </div>
+               <hr class="solid">
+               <p class="all-comment">Xem tất cả bình luận</p>
+               <div class="comment-wrapper">
+                  <ul class="media-list">
+                     <% if(item.commentList != undefined) { %>
+                     <% item.commentList.forEach((comment, index) => { %>
+                     <% let lengthCommentList = item.commentList.length %>
+                     <li class="media">
+                        <p class="comment-index comment-index-<%=index%>"><%=lengthCommentList-index%></p>
+                        <a href="/<%= comment.email.split('@')[0] %>" class="pull-left">
+                        <img class="rounded-circle" src="images/<%= comment.avatar %>" width="40">
+                        </a>
+                        <div class="media-body">
+                           <span class="text-muted pull-right">
+                           <small class="text-muted">
+                              <% if (Math.ceil((Date.now() - comment.createdAt)/3600000) > 24) {%>
+                              <%- Math.ceil((Date.now() - comment.createdAt)/3600000/24) %> days ago 
+                              <% } else if (Math.ceil((Date.now() - comment.createdAt)/3600000) == 1){ %>
+                              Vừa xong
+                              <% } else { %>
+                              <%- Math.ceil((Date.now() - comment.createdAt)/3600000) %> h ago %>
+                              <% } %>
+                           </small>
+                           </span>
+                           <strong class="text-success"><%= comment.username %></strong>
+                           <p>
+                              <%= comment.comment %>
+                           </p>
+                        </div>
+                     </li>
+                     <% }); %>
+                     <% } %>
+                  </ul>
+               </div>
+               <div class="bg-light p-2">
+                  <div class="d-flex flex-row align-items-start">
+                     <img class="rounded-circle" src="images/<%= user.avatar %>" width="40">
+                     <textarea class="form-control ml-1 shadow-none textarea textarea-comment"></textarea>
+                  </div>
+                  <div class="text-right" style="margin-top: 10px;">
+                     <p class="comment-id" style="display: none;"><%= item.id %></p>
+                     <button class="btn btn-success post-comment">Đăng</button>
+                     <button class="btn btn-danger cancel-comment">Hủy</button>
+                  </div>
+               </div>
+               <hr>
             </div>
-            <hr>
             <% }); %>
             <% } %>
+            
             <div id="loading"><i class="material-icons">autorenew</i></div>
          </div>
       </div>

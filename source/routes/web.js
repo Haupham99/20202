@@ -1,5 +1,5 @@
 import express from "express";
-import {home, auth, profile, user, personal, friend, chat} from "./../controllers/index";
+import {home, auth, profile, user, personal, friend, chat, comment} from "./../controllers/index";
 import UserModel from './../models/user.model';
 import {authValid} from './../validation/index';
 import passport from "passport";
@@ -81,6 +81,9 @@ let initRoutes = (app) => {
     router.post("/accept-friend/:userId/:contactId", friend.postAcceptFriend);
     router.post("/refuse-accept-friend/:userId/:contactId", friend.postRefuseAcceptFriend);
     router.post("/cancel-friend/:userId/:contactId", friend.postCancelFriend);
+
+    // Comment
+    router.post("/comment/:postId/:userId/:comment", comment.postComment);
 
     // Personal Page
     router.get("/personal", auth.checkLoggedIn, personal.getPersonal);
