@@ -1,5 +1,5 @@
 import express from "express";
-import {home, auth, profile, user, personal, friend, chat, comment, notification} from "./../controllers/index";
+import {home, auth, profile, user, personal, friend, chat, comment, notification, group} from "./../controllers/index";
 import UserModel from './../models/user.model';
 import {authValid} from './../validation/index';
 import passport from "passport";
@@ -61,10 +61,15 @@ let initRoutes = (app) => {
     router.post("/chat/:userId/:userUsername/:userAvatar/:friendId/:friendUsername/:friendAvatar/:text", chat.postChat);
 
     // End Chat
-    router.get("/group-class", async function (req, res) {
-        res.setHeader("Content-Type", "text/html");
-        res.render("./student/group-class");
-    });
+
+    // Group
+    router.get("/group", auth.checkLoggedIn, group.getGroup);
+    router.post("/group/post-post", auth.checkLoggedIn, group.postPost);
+    router.get("/member", auth.checkLoggedIn, group.getMember);
+    router.get("/member-request", group.getMemberRequest);
+    router.post("/accept-member/:userId", group.postAcceptMember);
+    // router.post("/refuse-accept-member/:userId", group.postRefuseAcceptMember);
+    // router.post("/cancel-member/:userId", group.postCancelMember);
     
     // router.get("/profile", async function (req, res) {
     //     res.setHeader("Content-Type", "text/html");
@@ -87,6 +92,7 @@ let initRoutes = (app) => {
 
     // Comment
     router.post("/comment/:postId/:userId/:comment", comment.postComment);
+    router.post("/comment/:postId/:userId/:comment/:groupId", comment.postComment);
 
     // Personal Page
     router.get("/personal", auth.checkLoggedIn, personal.getPersonal);

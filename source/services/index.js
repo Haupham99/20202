@@ -5,6 +5,7 @@ import friendService from './friendService';
 import commentService from './commentService';
 import notificationService from './notificatonService';
 import chatService from './chatService';
+import groupService from './groupService';
 
 export const auth = authService;
 export const user = userService;
@@ -13,3 +14,4 @@ export const friend = friendService;
 export const comment = commentService;
 export const notification = notificationService;
 export const chat = chatService;
+export const group = groupService;

@@ -7,6 +7,7 @@ import friendController from './friendController';
 import chatController from './chatController';
 import commentController from './commentController';
 import notificationController from './notificationController';
+import groupController from './groupController';
 
 export const home = homeController;
 export const auth = authController;
@@ -17,3 +18,4 @@ export const friend = friendController;
 export const chat = chatController;
 export const comment = commentController;
 export const notification = notificationController;
+export const group = groupController;

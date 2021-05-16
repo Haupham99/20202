@@ -76,7 +76,7 @@
                <div class="menu_nav">
                   <ul id="nav">
                      <li class="tab-home"><a href="./index">Trang chủ</a></li>
-                     <li class="tab-group-class"><a href="./group-class">Nhóm lớp</a></li>
+                     <li class="tab-group-class"><a href="./group">Nhóm lớp</a></li>
                      <li class="tab-chat"><a href="./chat">Nói chuyện</a></li>
                      <li id="notification_li">
                         <span id="notification_count">0</span>
@@ -133,6 +133,7 @@
       sessionStorage.setItem("email", "<%= user.email %>");
       sessionStorage.setItem("username", "<%= user.username %>");
       sessionStorage.setItem("avatar", "<%= user.avatar %>");
+      sessionStorage.setItem("groupId", "<%= user.group %>");
       $("#logout").click(function(){
          sessionStorage.clear();
       });

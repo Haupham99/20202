@@ -2,10 +2,23 @@ import postModel from './../models/post.model';
 
 let getPost = (req, userId) => {
     return new Promise(async (resolve, reject) =>{
-        let postArr = await postModel.findByUserId(userId);
+        let postArr = [];
+        let postArr1 = await postModel.findByUserId(userId);
+        postArr1.forEach(post => {
+            if(post.groupId == undefined){
+                postArr.push(post);
+            };
+        });
         resolve(postArr);
     });
 };
+
+let getPostByGroupId = (req, res) => {
+    return new Promise(async (resolve, reject) =>{
+        let postArr = await postModel.findByGroupId(groupId);
+        resolve(postArr);
+    });
+}
 
 let postPost = (req, userId, data) => {
     var formData = {email: req.user.email.split("@")[0], "userId": userId, "username": req.user.username};
@@ -38,5 +51,6 @@ let likePost = (req, res) => {
 module.exports = {
     postPost: postPost,
     getPost: getPost,
-    likePost: likePost
+    likePost: likePost,
+    getPostByGroupId: getPostByGroupId
 };

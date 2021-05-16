@@ -19,6 +19,7 @@ let UserSchema = new Schema({
     password: String,
     isActive: {type: Boolean, default: false},
     verifyToken: String,
+    joinedGroup: {type: Boolean, default: false},
     createdAt: {type: Number, default: Date.now},
     updatedAt: {type: Number, default: null},
     deletedAt: {type: Number, default: null}
@@ -42,7 +43,18 @@ UserSchema.statics = {
     },
 
     findByGroup(group){
-        return this.find({group: group}).exec();
+        return this.find({group: group, joinedGroup: true}).exec();
+    },
+
+    findRequestByGroup(group){
+        return this.find({group: group, joinedGroup: false}).exec();
+    },
+
+    acceptMember(userId){
+        return this.findOneAndUpdate(
+            {_id: userId},
+            {joinedGroup: true}
+        ).exec();
     },
 
     verify(token) {

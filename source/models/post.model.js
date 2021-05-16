@@ -32,6 +32,10 @@ PostSchema.statics = {
         return this.find({userId: userId}).sort({createdAt: -1}).exec();
     },
 
+    findByGroupId(groupId){
+        return this.find({groupId: groupId}).sort({createdAt: -1}).exec();
+    },
+
     likePost(id, data){
         return this.findByIdAndUpdate(id, data).exec();
     },
