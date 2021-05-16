@@ -15,7 +15,7 @@ body, input, button
 
 img
 {
-    display: block;
+    /* display: block; */
     /* width: 100%; */
     border: 0;
 }
@@ -1236,4 +1236,9 @@ hr.dashed {
 
 .display-two {
     display: none;
+}
+
+.dropdown-menu {
+    width: 100px !important;
+    /* height: 100px !important; */
 }

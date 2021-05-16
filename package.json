@@ -16,7 +16,7 @@
     "body-parser": "^1.18.2",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^2.0.1",
-    "cookie-parser": "^1.4.5",
+    "cookie-parser": "^1.4.4",
     "ejs": "^3.1.6",
     "esm": "^3.2.25",
     "exphbs": "^1.2.0",
@@ -38,7 +38,9 @@
     "otplib": "^12.0.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "passport.socketio": "^3.7.0",
     "qrcode": "^1.4.4",
+    "socket.io": "^2.2.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

@@ -10,6 +10,8 @@ $("document").ready(function(){
         let a = $(this);
         let postId = a.parents().eq(0).find('p').text();
         let userId = sessionStorage.getItem("userId");
+        let userIdPost = $(this).parents().eq(2).find('h1').text();
+        // console.log("hello: " + userIdPost);
         let comment = a.parents().eq(1).find("textarea").val().trim();
         if(comment != ""){
             $.ajax({
@@ -34,8 +36,9 @@ $("document").ready(function(){
                   </li>
                     `);
                     a.parents().eq(1).find("textarea").val("");
-                    console.log(a.parents().eq(3).find(".comment span").text());
+                    // console.log(a.parents().eq(3).find(".comment span").text());
                     a.parents().eq(2).find(".comment span").text(parseInt(a.parents().eq(2).find(".comment span").text()) + 1);
+                    socket.emit("comment-post", {userIdPost: userIdPost});
                 },
                 error: function(result){
                     console.log(result);

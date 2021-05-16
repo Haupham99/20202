@@ -18,7 +18,7 @@ $("document").ready(function(){
 	// Upload image
 
 	// Like post
-	$(".like").click(function() {
+	$(".like").off("click").on("click", function(){
 		let a = $(this);
 		let like = $(this).find('span').text();
 		let postId = $(this).find('p').text();
@@ -26,7 +26,6 @@ $("document").ready(function(){
 		let userId = sessionStorage.getItem("userId");
 		if(!a.find("i").hasClass("liked")){
 			$.ajax({
-
 				// url: "/personal/post/:postId/:userId/:userIdPost/:like",
 				url: "/personal/post/" + postId + "/" + userId + "/" + userIdPost + "/" + like,
 				type: "POST",
@@ -34,6 +33,7 @@ $("document").ready(function(){
 				success: function(result){
 					a.find('i').addClass("liked");
 					a.find('span').text(result["likes"]);
+					socket.emit("like-post", {userIdPost: userIdPost});
 				},
 				error: function(result){
 					console.log(result);
@@ -41,6 +41,4 @@ $("document").ready(function(){
 			});
 		}
 	});
-
-	
 });

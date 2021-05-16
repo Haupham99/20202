@@ -153,6 +153,7 @@
             <% postArr.forEach((item) => { %>
                <p style="display: none;"><%= item.id %></p>
                <div>
+                  <a class="a-notif-post" href="#<%= item.id %>" id="<%= item.id %>" name="<%= item.id %>"></a>
                   <div class="post">
                      <div class="tb">
                         <a href="/<%= item.email %>" class="td p-p-pic"><img src="images/<%= user.avatar %>" alt="images/<%= user.avatar %>"></a>
@@ -223,7 +224,14 @@
                         <% if(item.commentList != undefined) { %>
                         <% item.commentList.forEach((comment, index) => { %>
                         <% let lengthCommentList = item.commentList.length %>
-                        <li class="media">
+                        <li class="media" style="position: relative;">
+                           <div class="dropdown dropleft" style="position:absolute; right: 20px; cursor: pointer;">
+                              <h5 data-toggle="dropdown">...
+                              <span class="caret"></span></h5>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Xóa bình luận</a></li>
+                              </ul>
+                            </div>
                            <p class="comment-index comment-index-<%=index%>"><%=lengthCommentList-index%></p>
                            <a href="/<%= comment.email.split('@')[0] %>" class="pull-left">
                            <img class="rounded-circle" src="images/<%= comment.avatar %>" width="40">

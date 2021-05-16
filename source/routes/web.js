@@ -1,5 +1,5 @@
 import express from "express";
-import {home, auth, profile, user, personal, friend, chat, comment} from "./../controllers/index";
+import {home, auth, profile, user, personal, friend, chat, comment, notification} from "./../controllers/index";
 import UserModel from './../models/user.model';
 import {authValid} from './../validation/index';
 import passport from "passport";
@@ -54,16 +54,16 @@ let initRoutes = (app) => {
 
     router.post("/change-password", auth.checkLoggedIn, user.updatePassword);
     
+    // Chat
+
     router.get("/chat", auth.checkLoggedIn, chat.getChat);
-    
+    router.get("/chat/:userId/:friendId", auth.checkLoggedIn, chat.getConversation);
+    router.post("/chat/:userId/:userUsername/:userAvatar/:friendId/:friendUsername/:friendAvatar/:text", chat.postChat);
+
+    // End Chat
     router.get("/group-class", async function (req, res) {
         res.setHeader("Content-Type", "text/html");
         res.render("./student/group-class");
-    });
-    
-    router.get("/notification", async function (req, res) {
-        res.setHeader("Content-Type", "text/html");
-        res.render("./student/notification");
     });
     
     // router.get("/profile", async function (req, res) {
@@ -73,6 +73,9 @@ let initRoutes = (app) => {
 
     router.get("/profile", auth.checkLoggedIn, profile.getProfile);
     
+    // Notification
+    router.get("/notification", auth.checkLoggedIn, notification.getNotification);
+
     // Friend
     router.get("/friend", auth.checkLoggedIn, friend.getFriend);
     router.get("/friend-request/:userId", friend.getFriendRequest);
@@ -90,6 +93,11 @@ let initRoutes = (app) => {
     router.post("/personal/post-post", auth.checkLoggedIn, personal.postPost);
     router.post("/personal/post/:postId/:userId/:userIdPost/:like", personal.likePost);
     router.get("/:email", auth.checkLoggedIn, personal.getPersonalById);
+
+    // Notification
+    router.get("/notification/:userId", notification.getNotification);
+    router.post("/notification/:senderId/:senderUsername/:senderAvatar/:receiverId/:receiverUsername/:receiverAvatar/:content", notification.postNotification);
+    router.post("/notification/read/:notificationId", notification.postReadNotification);
 
     return app.use("/", router);
 };
