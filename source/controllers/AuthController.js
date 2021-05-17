@@ -117,7 +117,18 @@ let checkLoggedOut = (req, res, next) => {
     return res.redirect("/index");
   }
   next();
-}
+};
+
+let checkTeacher = (req, res, next) => {
+  if(req.isAuthenticated()) {
+    if(req.user.role == "teacher"){
+      next();
+    }else{
+      return res.redirect("/group");
+    }
+  }
+  next();
+};
 
 module.exports = {
   getLogin: getLogin,
@@ -126,5 +137,6 @@ module.exports = {
   checkLoggedIn: checkLoggedIn,
   checkLoggedOut: checkLoggedOut,
   postRegister: postRegister,
-  verifyAccount: verifyAccount
+  verifyAccount: verifyAccount,
+  checkTeacher: checkTeacher
 };

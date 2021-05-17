@@ -71,12 +71,12 @@ let postAcceptMember = async function(req, res) {
 };
 
 let postRefuseAcceptMember = async function(req, res) {
-    let member = await group.postRefuseAcceptMember(req, res, req.params.userId, req.params.contactId);
+    let member = await group.postRefuseAcceptMember(req, res);
     res.status(200).send({"message": "refuse success"});
 };
 
 let postCancelMember = async function(req, res) {
-    let member = await group.postCancelMember(req, res, req.params.userId, req.params.contactId);
+    let member = await group.postCancelMember(req, res);
     res.status(200).send({"message": "cancel success"});
 };
 

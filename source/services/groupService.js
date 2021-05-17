@@ -4,7 +4,7 @@ import userModel from './../models/user.model';
 let getPostByGroupId = (req, res) => {
     return new Promise(async (resolve, reject) =>{
         let groupId = req.user.group;
-        console.log(groupId);
+        // console.log(groupId);
         let postArr = await postModel.findByGroupId(groupId);
         // console.log(postArr.length);
         resolve(postArr);
@@ -48,18 +48,20 @@ let postAcceptMember = (req, res) => {
     });
 };
 
-let postRefuseAcceptMember = (req, res, userId, contactId) => {
+let postRefuseAcceptMember = (req, res) => {
     return new Promise(async (resolve, reject) =>{
         // console.log(userId);
-        let result = await contactModel.refuseAcceptFriend(userId, contactId);
+        let userId = req.params.userId;
+        let result = await userModel.refuseAcceptMember(userId);
         // console.log(friendArrId);
         resolve(result);
     });
 };
 
-let postCancelMember = (req, res, userId, contactId) => {
+let postCancelMember = (req, res) => {
     return new Promise(async (resolve, reject) =>{
-        let result = await contactModel.cancelFriend(userId, contactId);
+        let userId = req.params.userId;
+        let result = await userModel.cancelMember(userId);
         resolve(result);
     });
 };

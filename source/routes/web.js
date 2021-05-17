@@ -65,11 +65,11 @@ let initRoutes = (app) => {
     // Group
     router.get("/group", auth.checkLoggedIn, group.getGroup);
     router.post("/group/post-post", auth.checkLoggedIn, group.postPost);
-    router.get("/member", auth.checkLoggedIn, group.getMember);
+    router.get("/member", auth.checkTeacher, group.getMember);
     router.get("/member-request", group.getMemberRequest);
     router.post("/accept-member/:userId", group.postAcceptMember);
-    // router.post("/refuse-accept-member/:userId", group.postRefuseAcceptMember);
-    // router.post("/cancel-member/:userId", group.postCancelMember);
+    router.post("/refuse-accept-member/:userId", group.postRefuseAcceptMember);
+    router.post("/cancel-member/:userId", group.postCancelMember);
     
     // router.get("/profile", async function (req, res) {
     //     res.setHeader("Content-Type", "text/html");

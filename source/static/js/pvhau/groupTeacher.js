@@ -79,21 +79,20 @@ $("document").ready(function(){
         let a = $(this);
         $(document).off('click', ".refuse-accept-friend").on('click', ".refuse-accept-friend", function(e) {
             // console.log("Refuse!");
-            let contactId = sessionStorage.getItem("userId");
             let userId = a.parents().eq(3).find("p.accept-friend").text();
             // console.log(userId, contactId);
             $.ajax({
                 // url: "/personal/post/:postId/:userId/:userIdPost/:like",
-                url: "/refuse-accept-friend/" + userId + "/" + contactId,
+                url: "/refuse-accept-member/" + userId,
                 type: "POST",
                 contentType: false,
                 success: function(result){
-                    a.parents().eq(0).find('button.accept-friend').text("Đã từ chối lời mời");
+                    a.parents().eq(0).find('button.accept-friend').text("Đã từ chối yêu cầu tham gia");
                     a.parents().eq(0).find('button.accept-friend').removeClass("accept-friend");
                     a.remove();
                 },
                 error: function(result){
-                    a.parents().eq(0).find('button.accept-friend').text("Đã từ chối lời mời");
+                    a.parents().eq(0).find('button.accept-friend').text("Đã từ chối yêu cầu tham gia");
                     a.parents().eq(0).find('button.accept-friend').removeClass("accept-friend");
                     a.remove();
                 },
@@ -106,14 +105,13 @@ $("document").ready(function(){
         let a = $(this);
         $(document).off('click', "button.cancel-friend").on('click', "button.cancel-friend", function(e) {
             // console.log("Refuse!");
-            let contactId = sessionStorage.getItem("userId");
             let userId = a.parents().eq(3).find("p.list-friend").text().trim();
             // console.log("userId: ", userId);
             // console.log("contactId: ", contactId);
             // console.log(a.parents().eq(0).find('a button.profile-success').text());
             $.ajax({
                 // url: "/personal/post/:postId/:userId/:userIdPost/:like",
-                url: "/cancel-friend/" + userId + "/" + contactId,
+                url: "/cancel-member/" + userId,
                 type: "POST",
                 contentType: false,
                 success: function(result){
@@ -133,7 +131,7 @@ $("document").ready(function(){
                         e.preventDefault();
                         //do other stuff when a click happens
                     });
-                    a.parents().eq(0).find('a button.profile-success').text("Đã hủy kết bạn");
+                    a.parents().eq(0).find('a button.profile-success').text("Đã xóa thành viên");
                     a.remove();
                 },
             });

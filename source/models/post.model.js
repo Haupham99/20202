@@ -42,6 +42,10 @@ PostSchema.statics = {
 
     commentPost(id){
         return this.findByIdAndUpdate(id, {$inc : {'comments' : 1}}).exec();
+    },
+
+    getHome(userId){
+        return this.find({userId: userId}).sort({createdAt: -1}).exec();
     }
 };
 
