@@ -15,7 +15,7 @@ let getHome = (req, res, userId) => {
             });
         }
         postArr.sort(function(a, b){return b["createdAt"] - a["createdAt"]});
-        resolve(postArr);
+        resolve(postArr.slice(0, 10));
     });
 };
 
