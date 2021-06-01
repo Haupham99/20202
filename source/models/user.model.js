@@ -89,6 +89,22 @@ UserSchema.statics = {
 
     updatePassword(id, password){
         return this.findByIdAndUpdate(id, {password: password, updatedAt: Date.now()}).exec();
+    },
+
+    findByIdentify(identify){
+        return this.find({group: identify, joinedGroup: "true"}).exec();
+    },
+
+    findMemberRequestByIdentify(identify){
+        return this.find({group: identify, joinedGroup: "false", rejectedGroup: "false"}).exec();
+    },
+
+    findMemberRequestAll(){
+        return this.find({joinedGroup: "false", rejectedGroup: "false"}).exec();
+    },
+
+    postResendRequest(userId){
+        return this.findByIdAndUpdate(userId, {rejectedGroup: false}).exec();
     }
 };
 

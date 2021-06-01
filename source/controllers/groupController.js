@@ -2,6 +2,7 @@ import {group, comment} from "./../services/index";
 
 let getGroup = async function (req, res) {
     let postArr = await group.getPostByGroupId(req, res);
+    let memberArr = await group.getMember(req, res)
     for(let i = 0; i < postArr.length; i++){
       // console.log(postArr[i]._id);
       let comments = await comment.getComment(req, res, postArr[i]._id)
@@ -25,12 +26,27 @@ let getGroup = async function (req, res) {
             });
         }
     }else if(req.user.role == "teacher"){
-      res.render("./teacher/group", {
-        errors: req.flash("errors"),
-        success: req.flash("success"),
-        user: req.user,
-        postArr: postArr
-      });
+        if(req.user.joinedGroup == true){
+            res.render("./teacher/group", {
+                errors: req.flash("errors"),
+                success: req.flash("success"),
+                user: req.user,
+                postArr: postArr
+            });
+        }else{
+            res.render("./teacher/groupNone", {
+                errors: req.flash("errors"),
+                success: req.flash("success"),
+                user: req.user,
+            });
+        }
+    }else if(req.user.role == "admin"){
+        res.render("./admin/member", {
+          errors: req.flash("errors"),
+          success: req.flash("success"),
+          user: req.user,
+          memberArr: memberArr
+        });
     }
 };
 

@@ -1,5 +1,5 @@
 import express from "express";
-import {home, auth, profile, user, personal, friend, chat, comment, notification, group} from "./../controllers/index";
+import {admin, home, auth, profile, user, personal, friend, chat, comment, notification, group} from "./../controllers/index";
 import UserModel from './../models/user.model';
 import {authValid} from './../validation/index';
 import passport from "passport";
@@ -71,6 +71,14 @@ let initRoutes = (app) => {
     router.post("/refuse-accept-member/:userId", group.postRefuseAcceptMember);
     router.post("/cancel-member/:userId", group.postCancelMember);
     
+    // Admin
+    router.get("/manage-group/:identify", admin.getMemberByIdentify);
+    router.get("/manage-member-request/:identify", admin.getMemberRequestByIdentify);
+    router.get("/manage-member-request-all", admin.getMemberRequestAll);
+    router.post("/resend-request/:userId", admin.postResendRequest);
+    
+    // router.get("/manage-group", auth.checkLoggedIn, admin.getGroup);
+
     // router.get("/profile", async function (req, res) {
     //     res.setHeader("Content-Type", "text/html");
     //     res.render("./student/profile");

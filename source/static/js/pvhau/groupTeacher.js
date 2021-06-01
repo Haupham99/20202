@@ -31,13 +31,14 @@ $("document").ready(function(){
                     <p class="accept-friend" style="display: none">` + result.data[i]._id + `</p>
                     <div class="chat_img"><a href="` + result.data[i].email.split("@")[0] + `"> <img src="images/` + result.data[i]["avatar"] + `" alt="sunil"></a> </div>
                     <div class="chat_ib">
-                    <h5>` + result.data[i].username + ` <span class="chat_date">
+                    <h5 style="font-weight: bold">` + result.data[i].username + ` <span class="chat_date">
                         <button class="btn btn-success accept-friend">Phê duyệt</button>
                         <button type="button" class="btn btn-danger exampleModal2" data-toggle="modal" data-target="#exampleModal2">
                            Từ chối
                          </button>
                         </span>
                     </h5>
+                    <small>Email: ` + result.data[i].email + `</small>
                     </div>
                     </div>
                     `);
@@ -121,7 +122,7 @@ $("document").ready(function(){
                         e.preventDefault();
                         //do other stuff when a click happens
                     });
-                    a.parents().eq(0).find('a button.profile-success').text("Đã hủy kết bạn");
+                    a.parents().eq(0).find('a button.profile-success').text("Đã xóa thành viên");
                     a.remove();
                 },
                 error: function(result){

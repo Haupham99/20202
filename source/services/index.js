@@ -7,6 +7,7 @@ import notificationService from './notificatonService';
 import chatService from './chatService';
 import groupService from './groupService';
 import homeService from './homeService';
+import adminService from './admin/adminService';
 
 export const auth = authService;
 export const user = userService;
@@ -17,3 +18,4 @@ export const notification = notificationService;
 export const chat = chatService;
 export const group = groupService;
 export const home = homeService;
+export const admin = adminService;
