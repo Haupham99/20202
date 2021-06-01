@@ -46,7 +46,50 @@
          </div>
          <div class="form-group">
             <label for="website">Địa chỉ lớp</label>
-            <input disabled id="website" name="website" class="form-control" value="<%= user.class %>"/>
+            <input disabled id="website" name="website" class="form-control" value="<%= user.group %>"/>
+         </div>
+         <div class="form-group" style="margin-right: 10px;">
+            <label for="year" style="font-weight: bold;">Chọn khóa</label>
+            <select class="form-control" name="year" id="year">
+             <option value="65" selected>65</option>
+             <option value="64">64</option>
+             <option value="63">63</option>
+             <option value="62">62</option>
+             <option value="61">61</option>
+             <option value="60">60</option>
+             <option value="59">59</option>
+             <option value="58">58</option>
+             <option value="57">57</option>
+             <option value="56">56</option>
+             <option value="55">55</option>
+             <option value="54">54</option>
+             <option value="53">53</option>
+             <option value="52">52</option>
+             <option value="51">51</option>
+             <option value="50">50</option>
+           </select>
+           <label for="major" style="font-weight: bold;">Chọn viện</label>
+               <select class="form-control" name="major" id="major">
+                <option value="CNTT" selected>Công nghệ thông tin và truyền thông</option>
+                <option value="">Điện</option>
+                <option value="">Kỹ thuật hóa học</option>
+                <option value="">Cơ khí</option>
+                <option value="">Điện tử - viễn thông</option>
+                <option value="">Kinh tế - quản lý</option>
+                <option value="">Ngoại ngữ</option>
+                <option value="">Sư phạm kỹ thuật</option>
+                <option value="">Toán ứng dụng và tin học</option>
+                <option value="">Cơ khí động lực</option>
+                <option value="">Khoa học và công nghệ môi trường</option>
+              </select>
+              <label for="group" name="group" style="font-weight: bold;">Chọn lớp</label>
+                <select class="form-control" id="group" name="group">
+                 <option value="KHMT-01" selected>KHMT-01</option>
+                 <option value="KHMT-02">KHMT-02</option>
+                 <option value="KHMT-03">KHMT-03</option>
+                 <option value="KHMT-04">KHMT-04</option>
+                 <option value="KHMT-05">KHMT-05</option>
+               </select>
          </div>
          <button id="submit" type="submit" class="btn btn-danger">Cập nhật</button>
          <a href="/change-password"><button type="button" style="float: right;" class="btn btn-success">Thay đổi mật khẩu</button></a>

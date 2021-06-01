@@ -19,6 +19,7 @@ let UserSchema = new Schema({
     password: String,
     isActive: {type: Boolean, default: false},
     verifyToken: String,
+    resetToken: String,
     joinedGroup: {type: Boolean, default: false},
     rejectedGroup: {type: Boolean, default: false},
     createdAt: {type: Number, default: Date.now},
@@ -35,12 +36,23 @@ UserSchema.statics = {
         return this.findOne({"email": email}).exec();
     },
 
+    findByEmailAndUpdate(user) {
+        return this.findOneAndUpdate(
+            {email: user.email},
+            {resetToken: user.resetToken}
+        ).exec();
+    },
+
     removeById(id) {
         return this.findByIdAndRemove(id).exec();
     },
 
     findByToken(token){
         return this.findOne({verifyToken: token}).exec();
+    },
+
+    findByResetToken(resetToken){
+        return this.findOne({resetToken: resetToken}).exec();
     },
 
     findByGroup(group){
@@ -76,6 +88,13 @@ UserSchema.statics = {
         return this.findOneAndUpdate(
             {verifyToken: token},
             {"isActive": true, "verifyToken": null}
+        ).exec();
+    },
+
+    verifyReset(token) {
+        return this.findOneAndUpdate(
+            {resetToken: token},
+            {"isActive": true, "resetToken": null}
         ).exec();
     },
 

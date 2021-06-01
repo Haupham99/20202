@@ -33,17 +33,27 @@ let updateAvatar = (req, res) => {
         }
         try {
             if(req.file != undefined){
+                let group = req.body.group + "-" + req.body.year;
+                // console.log(group);
                 var updateUserItem = {
                     avatar: req.file.filename,
                     updateAt: Date.now(),
                     username: req.body.username,
-                    birthday: req.body.birthday
+                    birthday: req.body.birthday,
+                    group: group,
+                    rejectedGroup: false,
+                    joinedGroup: false
                 };
             }else{
+                let group = req.body.group + "-" + req.body.year;
+                // console.log(group);
                 var updateUserItem = {
                     updateAt: Date.now(),
                     username: req.body.username,
-                    birthday: req.body.birthday
+                    birthday: req.body.birthday,
+                    group: group,
+                    rejectedGroup: false,
+                    joinedGroup: false
                 };
             }
             // Update user

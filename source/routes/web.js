@@ -46,6 +46,11 @@ let initRoutes = (app) => {
         failureFlash: true
     }));
 
+    router.get("/forgot-password", auth.checkLoggedOut, auth.getForgotPassword);
+    router.post("/forgot-password", auth.checkLoggedOut, auth.postForgotPassword);
+    router.get("/:email/reset/:token", auth.getResetPassword);
+    router.post("/:email/reset/:token", auth.postResetPassword);
+
     router.get("/logout", auth.checkLoggedIn, auth.getLogout);
 
     router.post("/user/update-avatar", auth.checkLoggedIn, user.updateAvatar);

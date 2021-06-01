@@ -63,6 +63,68 @@ let getRegister = (req, res) => {
   });
 };
 
+let getResetPassword = (req, res) => {
+  res.setHeader("Content-Type", "text/html");
+  res.render("./login/reset-password", {
+    errors: req.flash("errors"),
+    success: req.flash("success")
+  });
+};
+
+let postResetPassword = async (req, res) => {
+  let errorArr = [];
+  let successArr = [];
+  try {
+    let verifySuccess = await auth.postResetPassword(req, res, req.params.email, req.params.token);
+    successArr.push(verifySuccess);
+    req.flash("success", successArr);
+    return res.redirect('./login'); 
+  } catch (error) {
+    errorArr.push(error);
+    req.flash("errors", errorArr);
+    return res.redirect('back');
+  }
+}
+
+
+let getForgotPassword = (req, res) => {
+  res.setHeader("Content-Type", "text/html");
+  res.render("./login/forgot-password", {
+    errors: req.flash("errors"),
+    success: req.flash("success")
+  });
+};
+
+let postForgotPassword = async (req, res) => {
+  let errorArr = [];
+  let successArr = [];
+  
+  let validationErrors = validationResult(req);
+  if(!validationErrors.isEmpty()){
+    let errors = Object.values(validationErrors.mapped());
+    errors.forEach((item) => {
+      errorArr.push(item.msg);
+    });
+
+    req.flash("errors", errorArr);
+    return res.redirect('/forgot-password');
+  };
+
+  try {
+    let email = req.body["email"];
+    // console.log(role);
+    let createUserSuccess = await auth.postForgotPassword(email, req.protocol, req.get("host"));
+    successArr.push(createUserSuccess);
+    req.flash("success", successArr);
+    return res.redirect('/forgot-password');
+  } catch (error) {
+    errorArr.push(error);
+    req.flash("errors", errorArr);
+    return res.redirect('/forgot-password');
+  }
+};
+
+
 let postRegister = async (req, res) => {
   let errorArr = [];
   let successArr = [];
@@ -79,7 +141,10 @@ let postRegister = async (req, res) => {
   };
 
   try {
-    let createUserSuccess = await auth.register(req.body["email-register"], req.body["pwd-register"], req.protocol, req.get("host"));
+    let group = req.body["group"] + "-" + req.body["year"];
+    let role = req.body["role"];
+    // console.log(role);
+    let createUserSuccess = await auth.register(req.body["email-register"], req.body["pwd-register"], group, role, req.protocol, req.get("host"));
     successArr.push(createUserSuccess);
     req.flash("success", successArr);
     return res.redirect('/login');
@@ -141,6 +206,8 @@ let checkAdmin = (req, res, next) => {
   next();
 };
 
+
+
 module.exports = {
   getLogin: getLogin,
   getLogout: getLogout,
@@ -150,5 +217,9 @@ module.exports = {
   postRegister: postRegister,
   verifyAccount: verifyAccount,
   checkTeacher: checkTeacher,
-  checkAdmin: checkAdmin
+  checkAdmin: checkAdmin,
+  getForgotPassword: getForgotPassword,
+  postForgotPassword: postForgotPassword,
+  getResetPassword: getResetPassword,
+  postResetPassword: postResetPassword
 };

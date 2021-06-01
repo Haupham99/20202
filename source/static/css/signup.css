@@ -1,7 +1,7 @@
 body{
 	margin:0;
     margin-top: 100px;
-	color:#00cae3;
+	color:#000;
 	background:#c8c8c8;
 	font:600 16px/18px 'Open Sans',sans-serif;
 }
@@ -14,7 +14,7 @@ a{color:inherit;text-decoration:none}
 	width:100%;
 	margin:auto;
 	max-width:925px;
-	min-height:720px;
+	min-height:1020px;
 	position:relative;
 	background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
@@ -23,7 +23,7 @@ a{color:inherit;text-decoration:none}
 	width:100%;
 	height:100%;
 	position:absolute;
-	padding:90px 70px 50px 70px;
+	padding:10px 70px 50px 70px;
 	background:white;
 	color: #00cae3;
 }
@@ -190,7 +190,7 @@ a{color:inherit;text-decoration:none}
 }
 .alert .close:hover{
     opacity: 1;
-    color: #00cae3;
+    color: #000;
 }
 .alert.alert-info {
     background-color: #00cae3;
