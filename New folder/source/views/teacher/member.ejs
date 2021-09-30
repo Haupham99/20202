@@ -1,0 +1,219 @@
+<% extend("./../main/main") %>
+<script type="text/javascript" src="js/pvhau/personal.js"></script>
+<script type="text/javascript" src="js/pvhau/chat.js"></script>
+<script type="text/javascript" src="js/pvhau/groupTeacher.js"></script>
+<script></script>
+<link href="css/personal.css" rel="stylesheet" type="text/css" />
+<main>
+   <div id="profile-upper">
+      <div id="profile-banner-image">
+         <img src="images/<%= user.coverAvatar %>" alt="Banner image">
+      </div>
+      <div id="profile-d">
+         <div id="profile-pic">
+            <img src="images/<%= user.avatar %>">    
+         </div>
+         <div id="u-name"><%= user.username %></div>
+         <div class="tb" id="m-btns">
+            <div class="td">
+               <div class="m-btn"><i class="material-icons">format_list_bulleted</i><span>Activity log</span></div>
+            </div>
+            <div class="td">
+               <div class="m-btn"><i class="material-icons">lock</i><span>Privacy</span></div>
+            </div>
+         </div>
+         <div id="edit-profile"><i class="material-icons">camera_alt</i></div>
+      </div>
+      <div id="black-grd"></div>
+   </div>
+   <div id="main-content">
+   <div class="tb">
+      <div class="td" id="l-col">
+         <div class="l-cnt">
+            <div class="cnt-label">
+               <i class="l-i" id="l-i-i"></i>
+               <span>Intro</span>
+               <div class="lb-action"><i class="material-icons">edit</i></div>
+            </div>
+            <div id="i-box">
+               <div id="intro-line">Web developer - UI</div>
+               <div id="u-occ">Developing awesome UIs at <a href="#">Google LLC</a> Bengaluru and inspiring other companies to do so :)</div>
+               <div id="u-loc"><i class="material-icons">location_on</i><a href="#">Bengaluru</a>, <a href="#">India</a></div>
+            </div>
+         </div>
+         <div class="l-cnt l-mrg">
+            <div class="cnt-label">
+               <i class="l-i" id="l-i-p"></i>
+               <span>Photos</span>
+               <div class="lb-action" id="b-i"><i class="material-icons">keyboard_arrow_down</i></div>
+            </div>
+            <div id="photos">
+               <div class="tb">
+                  <div class="tr">
+                     <div class="td"></div>
+                     <div class="td"></div>
+                     <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                     <div class="td"></div>
+                     <div class="td"></div>
+                     <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                     <div class="td"></div>
+                     <div class="td"></div>
+                     <div class="td"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="l-cnt l-mrg" >
+            <div class="cnt-label">
+               <i class="l-i" id="l-i-k"></i>
+               <span>Did You Know<i id="k-nm">1</i></span>
+            </div>
+            <div>
+               <div class="q-ad-c">
+                  <a href="#" class="q-ad">
+                  <img src="https://imagizer.imageshack.com/img923/1849/4TnLy1.png">
+                  <span>My favorite superhero is...</span>
+                  </a>
+               </div>
+               <div class="q-ad-c">
+                  <a href="#" class="q-ad" id="add_q">
+                  <i class="material-icons">add</i>
+                  <span>Add Answer</span>
+                  </a>
+               </div>
+            </div>
+         </div>
+         <div id="t-box">
+            <a href="#">Privacy</a> <a href="#">Terms</a> <a href="#">Advertising</a> <a href="#">Ad Choices</a> <a href="#">Cookies</a> <span id="t-more">More<i class="material-icons">arrow_drop_down</i></span>
+            <div id="cpy-nt">Facebook &copy; <span id="curr-year"></span></div>
+         </div>
+      </div>
+      <div class="td" id="m-col">
+         <div class="m-mrg" id="p-tabs">
+            <div class="tb">
+               <div class="td">
+                  <div class="tb" id="p-tabs-m">
+                     <div class="td"><a href="/group" class="a-none"><i class="material-icons">av_timer</i><span>TIMELINE</span></a></div>
+                     <div class="td active"><i class="material-icons">people</i><span>Thành viên</span></div>
+                     <div class="td"><i class="material-icons">photo</i><span>PHOTOS</span></div>
+                     <div class="td"><i class="material-icons">explore</i><span>ABOUT</span></div>
+                     <div class="td"><i class="material-icons">archive</i><span>ARCHIVE</span></div>
+                  </div>
+               </div>
+               <div class="td" id="p-tab-m"><i class="material-icons">keyboard_arrow_down</i></div>
+            </div>
+         </div>
+         <div class="m-mrg" id="composer">
+            <div id="c-tabs-cvr" style="margin-bottom: 10px;">
+               <div class="tb" id="c-tabs">
+                  <a href="/member"><div class="td friend active friend-all"><i class="material-icons fa-all">subject</i><span>Danh sách thành viên</span></div></a>
+                  <div class="td friend friend-request"><i class="fas fa-list-ul"></i><span>Yêu cầu tham gia</span></div>
+                  <!-- <div class="td friend friend-suggest"><i class="fas fa-user-plus"></i><span>Gợi ý mời tham gia</span></div> -->
+               </div>
+            </div>
+         </div>
+         <div style="background-color: aliceblue;" class="friend-tab list-friend">
+            <div class="chat_list">
+               <% if(memberArr != undefined) { %>
+                  <p>Có <%= memberArr.length %> thành viên</p>
+                  <% memberArr.forEach((item) => { %>
+               <div class="chat_people">
+                  <p class="list-friend" style="display: none"><%= item.id %></p>
+                  <div class="chat_img"><a href="/<%= item.email.split('@')[0] %>"><img src="images/<%= item.avatar %>" alt="sunil"></a></div>
+                  <div class="chat_ib">
+                     <h5 style="font-weight: bold;"><%= item.username %> <span class="chat_date">
+                        <a href="/<%= item.email.split('@')[0] %>"><button class="btn btn-success profile-success">Trang cá nhân</button></a>
+                        <!-- <button type="button" class="btn btn-danger" id="cancel-friend" data-toggle="modal" data-target="#cancel-friend">Hủy kết bạn</button> -->
+                        <button type="button" class="btn btn-danger exampleModal1" data-toggle="modal" data-target="#exampleModal1">
+                           Xóa khỏi nhóm
+                         </button>
+                        </span>
+                     </h5>
+                     <small>Email: <%= item.email %></small>
+                  </div>
+               </div>
+               <% }); %>
+               <% } %>
+            </div>
+         </div>
+         <div style="background-color: aliceblue; display: none;" class="friend-tab list-friend-request">
+            <div class="chat_list">
+            </div>
+         </div>
+         <div style="background-color: aliceblue; display: none;" class="friend-tab list-friend-suggest">
+            <div class="chat_list">
+
+            </div>
+         </div>
+
+
+          <!-- Modal1 -->
+          <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModal1Label">Xác nhận xóa khỏi nhóm</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <!-- <div class="modal-body">
+                  ...
+                </div> -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success cancel-friend" data-dismiss="modal">Có</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Không</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Modal2 -->
+          <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModal2Label">Xác nhận từ chối lời mời</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <!-- <div class="modal-body">
+                  ...
+                </div> -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success refuse-accept-friend" id="cancel-request" data-dismiss="modal">Có</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Không</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal3 -->
+          <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModal3Label">Xác nhận xóa đề nghị kết bạn</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <!-- <div class="modal-body">
+                  ...
+                </div> -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success refuse-suggest-friend" id="cancel-request" data-dismiss="modal">Có</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Không</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      </div>
+   </div>
+</main>

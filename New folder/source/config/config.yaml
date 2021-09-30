@@ -1,0 +1,13 @@
+version:
+  ver: "1.0.1"
+account:
+  "12345678": "admin"
+  "12345678000": "member"
+authen:
+  key: xxxxx
+  expiresIn: 24
+app:
+  port: 9678
+
+url:
+

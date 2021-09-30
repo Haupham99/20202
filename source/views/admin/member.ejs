@@ -12,14 +12,14 @@
       <div id="profile-d">
          <div id="u-name">Quản lý thành viên</div>
          <div class="tb" id="m-btns">
-            <div class="td">
+            <!-- <div class="td">
                <div class="m-btn"><i class="material-icons">format_list_bulleted</i><span>Activity log</span></div>
-            </div>
-            <div class="td">
+            </div> -->
+            <!-- <div class="td">
                <div class="m-btn"><i class="material-icons">lock</i><span>Privacy</span></div>
-            </div>
+            </div> -->
          </div>
-         <div id="edit-profile"><i class="material-icons">camera_alt</i></div>
+         <!-- <div id="edit-profile"><i class="material-icons">camera_alt</i></div> -->
       </div>
       <div id="black-grd"></div>
    </div>
@@ -39,69 +39,61 @@
          <div class="m-mrg" id="composer">
             <div id="c-tabs-cvr" style="margin-bottom: 10px;">
                <div class="tb" id="c-tabs">
-                  <a href="/member"><div class="td friend active friend-all"><i class="material-icons fa-all">subject</i><span>Danh sách thành viên</span></div></a>
-                  <div class="td friend friend-request"><i class="fas fa-list-ul"></i><span>Yêu cầu tham gia</span></div>
-                  <!-- <div class="td friend friend-suggest"><i class="fas fa-user-plus"></i><span>Gợi ý mời tham gia</span></div> -->
+                  <a href="/index"><div class="td friend active friend-all"><i class="material-icons fa-all">subject</i><span>Danh sách thành viên</span></div></a>
+                  <div class="td friend friend-request"><i class="fas fa-list-ul"></i><span>Thêm thành viên</span></div>
+                  <div class="td friend add-faculty"><i class="fas fa-user-plus"></i><span>Thêm viện</span></div>
+                  <div class="td friend add-group"><i class="fas fa-list-ul"></i><span>Thêm lớp</span></div>
                </div>
             </div>
          </div>
          <div class="m-mrg" id="composer">
             <div id="c-tabs-cvr" style="margin-bottom: 10px;">
                <div class="tb form" id="c-tabs" style="display: inline-flex;">
-                    <div class="form-group" style="margin-right: 10px;">
-                    <label for="year" style="font-weight: bold;">Chọn khóa</label>
-                    <select class="form-control" name="year" id="year">
-                     <option value="65" selected>65</option>
-                     <option value="64">64</option>
-                     <option value="63">63</option>
-                     <option value="62">62</option>
-                     <option value="61">61</option>
-                     <option value="60">60</option>
-                     <option value="59">59</option>
-                     <option value="58">58</option>
-                     <option value="57">57</option>
-                     <option value="56">56</option>
-                     <option value="55">55</option>
-                     <option value="54">54</option>
-                     <option value="53">53</option>
-                     <option value="52">52</option>
-                     <option value="51">51</option>
-                     <option value="50">50</option>
-                   </select>
-                    </div>
-                    <div class="form-group" style="margin-right: 50px;">
+                    <div class="form-group faculty" style="margin-right: 50px;">
                        <label for="major" style="font-weight: bold;">Chọn viện</label>
-                       <select class="form-control" name="major" id="major">
-                        <option value="CNTT" selected>Công nghệ thông tin và truyền thông</option>
-                        <option value="">Điện</option>
-                        <option value="">Kỹ thuật hóa học</option>
-                        <option value="">Cơ khí</option>
-                        <option value="">Điện tử - viễn thông</option>
-                        <option value="">Kinh tế - quản lý</option>
-                        <option value="">Ngoại ngữ</option>
-                        <option value="">Sư phạm kỹ thuật</option>
-                        <option value="">Toán ứng dụng và tin học</option>
-                        <option value="">Cơ khí động lực</option>
-                        <option value="">Khoa học và công nghệ môi trường</option>
+                       <select id="faculty" class="form-control" name="major" id="major">
+                        <option value="">Chọn viện</option>
+                        <% if(facultieArr != undefined) { %>
+                          <% facultieArr.forEach((item) => { %>
+                        <option value="<%= item.id %>"><%= item.facultyName %></option>
+                          <% }); %>
+                        <% } %>
                       </select>
                    </div>
                     <div class="form-group" style="margin-right: 50px;">
                         <label for="group" name="group" style="font-weight: bold;">Chọn lớp</label>
-                        <select class="form-control" id="group">
-                         <option value="KHMT-01" selected>KHMT-01</option>
-                         <option value="KHMT-02">KHMT-02</option>
-                         <option value="KHMT-03">KHMT-03</option>
-                         <option value="KHMT-04">KHMT-04</option>
-                         <option value="KHMT-05">KHMT-05</option>
+                        <select id="group" class="form-control" id="group">
+                         <option value="">Chọn lớp</option>
                        </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="search" style="float: right;">
                         <label for="">. </label>
-                        <button type="submit" class="form-control btn btn-danger submit">Tìm</button>
+                        <button type="button" class="form-control btn btn-danger">Tìm</button>
                     </div>
                </div>
             </div>
          </div>
+
+                   <!-- Modal1 -->
+                   <!-- <div class=""> -->
+                    <div class="modal-dialog" role="document" style="display: none;">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModal1Label">Cập nhật thành công</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <!-- <div class="modal-body">
+                          ...
+                        </div> -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+                        </div>
+                      </div>
+                    </div>
+                  <!-- </div> -->
+
          <div style="background-color: aliceblue;" class="friend-tab list-friend">
             <div class="chat_list">
 

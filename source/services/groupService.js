@@ -1,5 +1,6 @@
 import postModel from './../models/post.model';
 import userModel from './../models/user.model';
+import groupModel from './../models/group.model';
 
 let getPostByGroupId = (req, res) => {
     return new Promise(async (resolve, reject) =>{
@@ -66,6 +67,11 @@ let postCancelMember = (req, res) => {
     });
 };
 
+let updateGroup = async (groupId, filename) => {
+    // console.log(groupId, filename);
+    await groupModel.updateGroup(groupId, filename);
+};
+
 module.exports = {
     getPostByGroupId: getPostByGroupId,
     postPost: postPost,
@@ -73,6 +79,7 @@ module.exports = {
     getMemberRequest: getMemberRequest,
     postAcceptMember: postAcceptMember,
     postRefuseAcceptMember: postRefuseAcceptMember,
-    postCancelMember: postCancelMember
+    postCancelMember: postCancelMember,
+    updateGroup: updateGroup
 };
 

@@ -31,6 +31,11 @@ $("document").ready(function() {
         },
     });
 
+    // $("#notificationLink").click(function(){
+    //     console.log("!noti");
+    //     $(this).css("background-color", "#006699");
+    // })
+
     // Show notification
     $("#notificationLink").click(function() {
         // console.log(1);

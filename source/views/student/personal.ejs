@@ -1,4 +1,9 @@
 <% extend("./../main/main") %>
+<style>
+   .tab-profile a{
+      background-color: #78bbe6
+   }
+</style>
 <script type="text/javascript" src="js/pvhau/personal.js"></script>
 <script type="text/javascript" src="js/pvhau/personalGeneral.js"></script>
 
@@ -6,22 +11,14 @@
 <main>
    <div id="profile-upper">
       <div id="profile-banner-image">
-         <img src="images/<%= user.coverAvatar %>" alt="Banner image">
+         <img id="cover-img" src="images/<%= user.coverAvatar %>" alt="Banner image">
       </div>
       <div id="profile-d">
          <div id="profile-pic">
             <img src="images/<%= user.avatar %>">    
          </div>
          <div id="u-name"><%= user.username %></div>
-         <div class="tb" id="m-btns">
-            <div class="td">
-               <div class="m-btn"><i class="material-icons">format_list_bulleted</i><span>Activity log</span></div>
-            </div>
-            <div class="td">
-               <div class="m-btn"><i class="material-icons">lock</i><span>Privacy</span></div>
-            </div>
-         </div>
-         <div id="edit-profile"><i class="material-icons">camera_alt</i></div>
+         <div id="edit-profile"><input id="choose-image" style="display: none;" type="file" id="avatar" name="avatar" value=""><i class="material-icons">camera_alt</i></div>
       </div>
       <div id="black-grd"></div>
    </div>
@@ -36,8 +33,8 @@
             </div>
             <div id="i-box">
                <div id="intro-line">Web developer - UI</div>
-               <div id="u-occ">Developing awesome UIs at <a href="#">Google LLC</a> Bengaluru and inspiring other companies to do so :)</div>
-               <div id="u-loc"><i class="material-icons">location_on</i><a href="#">Bengaluru</a>, <a href="#">India</a></div>
+               <!-- <div id="u-occ">Developing awesome UIs at <a href="#">Google LLC</a> Bengaluru and inspiring other companies to do so :)</div> -->
+               <div id="u-loc"><i class="material-icons">location_on</i><a href="#">Hà Nội</a>, <a href="#">Việt Nam</a></div>
             </div>
          </div>
          <div class="l-cnt l-mrg">
@@ -88,7 +85,7 @@
          </div>
          <div id="t-box">
             <a href="#">Privacy</a> <a href="#">Terms</a> <a href="#">Advertising</a> <a href="#">Ad Choices</a> <a href="#">Cookies</a> <span id="t-more">More<i class="material-icons">arrow_drop_down</i></span>
-            <div id="cpy-nt">Facebook &copy; <span id="curr-year"></span></div>
+            <!-- <div id="cpy-nt">Facebook &copy; <span id="curr-year"></span></div> -->
          </div>
       </div>
       <div class="td" id="m-col">
@@ -174,7 +171,15 @@
                               </span>
                            </div>
                         </div>
-                        <div class="td p-opt"><i class="material-icons">keyboard_arrow_down</i></div>
+                        <div class="td p-opt">
+                           <div class="dropdown dropleft" style="position:absolute; right: 20px; cursor: pointer;">
+                              <h5 data-toggle="dropdown" style="font-weight: bold!important;">...
+                              <span class="caret"></span></h5>
+                              <ul class="dropdown-menu">
+                                <li class="edit-post" style="font-weight: bold;">Xóa bài viết</li>
+                              </ul>
+                            </div>
+                        </div>                     
                      </div>
                      <div style="margin-top: 20px;">
                         <%= item.description %></p>
@@ -212,7 +217,7 @@
                                  <h1 style="display: none;"><%= item.userId %></h1>
                               </div>
                               <div class="p-act comment"><i class="material-icons">comment</i><span><%= item.comments  %></span></div>
-                              <div class="p-act share"><i class="material-icons">reply</i></div>
+                              <!-- <div class="p-act share"><i class="material-icons">reply</i></div> -->
                            </div>
                         </div>
                      </div>
@@ -225,13 +230,13 @@
                         <% item.commentList.forEach((comment, index) => { %>
                         <% let lengthCommentList = item.commentList.length %>
                         <li class="media" style="position: relative;">
-                           <div class="dropdown dropleft" style="position:absolute; right: 20px; cursor: pointer;">
+                           <!-- <div class="dropdown dropleft" style="position:absolute; right: 20px; cursor: pointer;">
                               <h5 data-toggle="dropdown">...
                               <span class="caret"></span></h5>
                               <ul class="dropdown-menu">
                                 <li><a href="#">Xóa bình luận</a></li>
                               </ul>
-                            </div>
+                            </div> -->
                            <p class="comment-index comment-index-<%=index%>"><%=lengthCommentList-index%></p>
                            <a href="/<%= comment.email.split('@')[0] %>" class="pull-left">
                            <img class="rounded-circle" src="images/<%= comment.avatar %>" width="40">
@@ -273,7 +278,6 @@
                </div>
             <% }); %>
             <% } %>
-            <div id="loading"><i class="material-icons">autorenew</i></div>
          </div>
       </div>
    </div>

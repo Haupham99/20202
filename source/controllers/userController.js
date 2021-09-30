@@ -33,29 +33,50 @@ let updateAvatar = (req, res) => {
         }
         try {
             if(req.file != undefined){
-                let group = req.body.group + "-" + req.body.year;
                 // console.log(group);
                 var updateUserItem = {
                     avatar: req.file.filename,
                     updateAt: Date.now(),
                     username: req.body.username,
-                    birthday: req.body.birthday,
-                    group: group,
-                    rejectedGroup: false,
-                    joinedGroup: false
                 };
             }else{
-                let group = req.body.group + "-" + req.body.year;
                 // console.log(group);
                 var updateUserItem = {
                     updateAt: Date.now(),
                     username: req.body.username,
-                    birthday: req.body.birthday,
-                    group: group,
-                    rejectedGroup: false,
-                    joinedGroup: false
                 };
             }
+            // Update user
+            let userUpdate = await user.updateUser(req.user._id, updateUserItem);
+            // Remove old user avatar
+            // await fsExtra.remove(`${app.avatar_directory}/${req.file.filename}`);
+            // let result = {
+            //     message: transSuccess.avatar_updated,
+            //     imageSrc: `/images/${req.file.filename}`
+            // };
+            // return res.status(200).send(result);
+            req.flash("success", transSuccess.avatar_updated);
+            return res.redirect("/profile");
+        } catch (error) {
+            console.log(error);
+            // return res.status(500).send(error);
+            req.flash("errors", transErrors.avatar_update_failed);
+            return res.redirect("/profile");
+        }
+    });
+};
+
+let updateCoverAvatar = (req, res) => {
+    avatarUploadFile(req, res, async (error) => {
+        if(error){
+            console.log(error);
+            return;
+        }
+        try {
+            var updateUserItem = {
+                coverAvatar: req.params.fileName,
+                updateAt: Date.now(),
+            };
             // Update user
             let userUpdate = await user.updateUser(req.user._id, updateUserItem);
             // Remove old user avatar
@@ -91,5 +112,6 @@ let updatePassword = async (req, res) => {
 
 module.exports = {
     updateAvatar: updateAvatar,
-    updatePassword: updatePassword
+    updatePassword: updatePassword,
+    updateCoverAvatar: updateCoverAvatar
 };

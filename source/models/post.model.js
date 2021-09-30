@@ -17,7 +17,7 @@ let PostSchema = new Schema({
     likes: {type: Number, default: 0},
     comments: {type: Number, default: 0},
     email: {type: String, trim: true},
-    groupId: String,
+    groupId: {type: String, default: null},
     createdAt: {type: Number, default: Date.now},
     updatedAt: {type: Number, default: null},
     deletedAt: {type: Number, default: null}
@@ -29,15 +29,20 @@ PostSchema.statics = {
     },
     
     findByUserId(userId){
-        return this.find({userId: userId}).sort({createdAt: -1}).exec();
+        return this.find({userId: userId, deletedAt: null, groupId: null}).sort({createdAt: -1}).exec();
     },
 
     findByGroupId(groupId){
-        return this.find({groupId: groupId}).sort({createdAt: -1}).exec();
+        return this.find({groupId: groupId, deletedAt: null}).sort({createdAt: -1}).exec();
     },
 
     likePost(id, data){
         return this.findByIdAndUpdate(id, data).exec();
+    },
+
+    deletePost(id){
+        // console.log(Math.round((new Date()).getTime() / 1000));
+        return this.findByIdAndUpdate(id, {"deletedAt": Math.round((new Date()).getTime())}).exec();
     },
 
     commentPost(id){
@@ -45,7 +50,7 @@ PostSchema.statics = {
     },
 
     getHome(userId){
-        return this.find({userId: userId}).sort({createdAt: -1}).exec();
+        return this.find({userId: userId, deletedAt: null, groupId: null}).sort({createdAt: -1}).exec();
     }
 };
 

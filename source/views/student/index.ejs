@@ -1,4 +1,9 @@
 <% extend("./../main/main") %>
+<style>
+   .tab-home a{
+      background-color: #78bbe6
+   }
+</style>
 <link href="css/personal.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/pvhau/personal.js"></script>
 <script type="text/javascript" src="js/pvhau/personalGeneral.js"></script>
@@ -11,9 +16,9 @@
          <div class="clr"></div>
          <ul class="sb_menu">
             <li class="tab-home"><a href="./">Trang chủ</a></li>
-            <li class="tab-group-class"><a href="./group-class">Nhóm lớp</a></li>
+            <li class="tab-group-class"><a href="./group">Nhóm lớp</a></li>
             <li class="tab-chat"><a href="./chat">Nói chuyện</a></li>
-            <li class="tab-notification"><a href="./notification">Thống báo</a></li>
+            <!-- <li class="tab-notification"><a href="./notification">Thống báo</a></li> -->
             <li class="tab-profile"><a href="./personal">Trang cá nhân</a></li>
          </ul>
       </div>
@@ -21,8 +26,8 @@
          <h2 class="star"><span>Thông tin nổi bật</span></h2>
          <div class="clr"></div>
          <ul class="ex_menu">
-            <li><a href="#">Tuyển sinh năm 2021</a></li>
-            <li><a href="#">Điểm rèn luyện kỳ học 20201</a></li>
+            <li><a href="https://ctt.hust.edu.vn/">Cổng thông tin HUST</a></li>
+            <li><a href="https://ctt.hust.edu.vn/DisplayWeb/DisplayListKeHoach?tag=%C4%90T%C4%90H">Kế hoạch đào tạo đại học</a></li>
          </ul>
       </div>
    </div>
@@ -93,7 +98,7 @@
                               <h1 style="display: none;"><%= item.userId %></h1>
                            </div>
                            <div class="p-act comment"><i class="material-icons">comment</i><span><%= item.comments  %></span></div>
-                           <div class="p-act share"><i class="material-icons">reply</i></div>
+                           <!-- <div class="p-act share"><i class="material-icons">reply</i></div> -->
                         </div>
                      </div>
                   </div>
@@ -106,13 +111,13 @@
                      <% item.commentList.forEach((comment, index) => { %>
                      <% let lengthCommentList = item.commentList.length %>
                      <li class="media" style="position: relative;">
-                        <div class="dropdown dropleft" style="position:absolute; right: 20px; cursor: pointer;">
+                        <!-- <div class="dropdown dropleft" style="position:absolute; right: 20px; cursor: pointer;">
                            <h5 data-toggle="dropdown">...
                            <span class="caret"></span></h5>
                            <ul class="dropdown-menu">
                              <li><a href="#">Xóa bình luận</a></li>
                            </ul>
-                         </div>
+                         </div> -->
                         <p class="comment-index comment-index-<%=index%>"><%=lengthCommentList-index%></p>
                         <a href="/<%= comment.email.split('@')[0] %>" class="pull-left">
                         <img class="rounded-circle" src="images/<%= comment.avatar %>" width="40">
@@ -154,7 +159,6 @@
             </div>
          <% }); %>
          <% } %>
-         <div id="loading"><i class="material-icons">autorenew</i></div>
       </div>
    </div>
 </div>

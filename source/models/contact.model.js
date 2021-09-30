@@ -15,6 +15,10 @@ ContactSchema.statics = {
     createNew(item) {
         return this.create(item);
     },
+
+    search(userId, contactId){
+        return this.find({userId: userId, contactId: contactId});
+    },
     
     findRequestByUserId(userId){
         return this.find({contactId: userId, status: false}).sort({createdAt: -1}).exec(); // Find one post

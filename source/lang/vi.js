@@ -5,6 +5,7 @@ export const transValidation = {
 
 export const transErrors = {
     wrong_account: "Email này chưa được dùng để tạo tài khoản",
+    account_incorrect: "Tài khoản email này không có trong hệ thống nhà trường",
     account_in_use: "Email này đã được sử dụng.",
     account_removed: "Tài khoản này đã được gỡ khỏi hệ thống.",
     account_not_active: "Email đã được đăng ký, vui lòng kiểm tra Email để kích hoạt tài khoản.",

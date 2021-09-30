@@ -190,6 +190,11 @@ ul.sb_menu li a:hover, ul.ex_menu li a:hover, ul.sb_menu li.active a, ul.ex_menu
 	color:#FFF;
 	background:#78bbe6;
 }
+
+a:visited{
+	background:#78bbe6!important;
+}
+
 ul.sb_menu li a:hover {
 	text-decoration:none;
 }

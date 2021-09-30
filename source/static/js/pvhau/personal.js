@@ -14,6 +14,26 @@ $("document").ready(function(){
 		};
 	});
 
+	// Delete Post
+	$(".edit-post").click(function(){
+		let a = $(this);
+		let postId = a.parents().eq(6).find('p:first').text();
+		$.ajax({
+
+			// url: "/personal/post/:postId/:userId/:userIdPost/:like",
+			url: "/post/delete/" + postId,
+			type: "POST",
+			contentType: false,
+			success: function(result){
+				console.log(a.parents().eq(6));
+				a.parents().eq(5).fadeOut();
+			},
+			error: function(result){
+				console.log(result);
+			},
+		});
+	});
+
 	// Upload image
 	$("#upload").change(function(){
 		// d = new Date();
@@ -59,5 +79,32 @@ $("document").ready(function(){
 				},
 			});
 		}
+	});
+
+	// Update Cover Image
+	$('#edit-profile').one('click', function(e) {  
+		e.preventDefault();      
+		console.log("update-image");
+		$("#choose-image").click();
+		$('#choose-image').change(function() {
+			let userId = sessionStorage.getItem('userId');
+			var filename = $('#choose-image').val();
+			console.log(filename.split('\\')[filename.split('\\').length-1]);
+			console.log(userId);
+			$("#cover-img").attr('src', 'images/' + filename.split('\\')[filename.split('\\').length-1]);
+			$.ajax({
+
+				// url: "/personal/post/:postId/:userId/:userIdPost/:like",
+				url: "/personal/update-cover/" + userId + '/' + filename.split('\\')[filename.split('\\').length-1],
+				type: "POST",
+				contentType: false,
+				success: function(result){
+					alert("Cập nhật thành công!");
+				},
+				error: function(result){
+					alert("Có lỗi xảy ra, xin thử lại!");
+				},
+			});
+		});
 	});
 });

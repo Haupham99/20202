@@ -1,5 +1,10 @@
 <script type="text/javascript" src="js/pvhau/chat.js"></script>
 <% extend("./../main/main") %>
+<style>
+  .tab-chat a{
+     background-color: #78bbe6
+  }
+</style>
 <div class="hbg"><img src="images/header_images.jpg" width="923" height="291" alt="" /></div>
 <div class="container">
 <h3 class=" text-center">Messaging</h3>
@@ -8,15 +13,15 @@
         <div class="inbox_people">
           <div class="headind_srch">
             <div class="recent_heading">
-              <h4>Recent</h4>
+              <h4>Gần đây</h4>
             </div>
-            <div class="srch_bar">
+            <!-- <div class="srch_bar">
               <div class="stylish-input-group">
                 <input type="text" class="search-bar"  placeholder="Search" >
                 <span class="input-group-addon">
                 <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
                 </span> </div>
-            </div>
+            </div> -->
           </div>
           <div class="inbox_chat">
             <!-- <div class="chat_list active_chat">
@@ -36,9 +41,9 @@
               <div class="chat_people">
                 <div class="chat_img"> <img src="images/<%= item.avatar %>" alt="sunil"> </div>
                 <div class="chat_ib">
-                  <h5><%= item.username %><span class="chat_date">Dec 25</span></h5>
-                  <p>Test, which is a new approach to have all solutions 
-                    astrology under one roof.</p>
+                  <h5><%= item.username %><span class="chat_date"></span></h5>
+                  <!-- <p>Test, which is a new approach to have all solutions 
+                    astrology under one roof.</p> -->
                 </div>
               </div>
             </div>
@@ -48,7 +53,7 @@
         </div>
         <div class="mesgs">
           <div class="msg_history">
-            <div class="incoming_msg">
+            <!-- <div class="incoming_msg">
               <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
               <div class="received_msg">
                 <div class="received_withd_msg">
@@ -85,7 +90,7 @@
                     products, at a price anyone can afford.</p>
                   <span class="time_date"> 11:01 AM    |    Today</span></div>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="type_msg">
             <div class="input_msg_write">

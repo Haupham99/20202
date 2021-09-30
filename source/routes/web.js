@@ -75,12 +75,20 @@ let initRoutes = (app) => {
     router.post("/accept-member/:userId", group.postAcceptMember);
     router.post("/refuse-accept-member/:userId", group.postRefuseAcceptMember);
     router.post("/cancel-member/:userId", group.postCancelMember);
+    router.post("/group/update-cover/:groupName/:fileName", group.updateAvatar);
     
     // Admin
     router.get("/manage-group/:identify", admin.getMemberByIdentify);
     router.get("/manage-member-request/:identify", admin.getMemberRequestByIdentify);
     router.get("/manage-member-request-all", admin.getMemberRequestAll);
     router.post("/resend-request/:userId", admin.postResendRequest);
+
+    router.get("/faculty/:facultyId", home.getGroup);
+    router.get("/group/:groupId", home.getMember);
+    router.post("/member/add/:email/:groupId/:roleId", home.addMember);
+    router.post("/member/edit/:email/:groupId/:roleId", home.editMember);
+    router.post("/faculty/add/:facultyName", home.addFaculty);
+    router.post("/group/add/:facultyId/:groupName", home.addGroup);
     
     // router.get("/manage-group", auth.checkLoggedIn, admin.getGroup);
 
@@ -96,6 +104,7 @@ let initRoutes = (app) => {
 
     // Friend
     router.get("/friend", auth.checkLoggedIn, friend.getFriend);
+    router.post("/search", auth.checkLoggedIn, friend.getFriendSearch);
     router.get("/friend-request/:userId", friend.getFriendRequest);
     router.get("/friend-suggest/:userId", friend.getFriendSuggest);
     router.post("/send-friend-request/:userId/:contactId", friend.postFriendRequest);
@@ -107,11 +116,15 @@ let initRoutes = (app) => {
     router.post("/comment/:postId/:userId/:comment", comment.postComment);
     router.post("/comment/:postId/:userId/:comment/:groupId", comment.postComment);
 
+    //Delete Post
+    router.post("/post/delete/:postId", personal.deletePost);
+
     // Personal Page
     router.get("/personal", auth.checkLoggedIn, personal.getPersonal);
     router.post("/personal/post-post", auth.checkLoggedIn, personal.postPost);
     router.post("/personal/post/:postId/:userId/:userIdPost/:like", personal.likePost);
     router.get("/:email", auth.checkLoggedIn, personal.getPersonalById);
+    router.post("/personal/update-cover/:userId/:fileName", user.updateCoverAvatar);
 
     // Notification
     router.get("/notification/:userId", notification.getNotification);

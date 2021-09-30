@@ -1,4 +1,7 @@
 import UserModel from './../models/user.model';
+import MemberModel from './../models/member.model';
+import GroupModel from './../models/group.model';
+import RoleModel from './../models/role.model';
 import bcrypt from 'bcrypt';
 import uuidv4 from 'uuid/v4';
 import {transErrors, transSuccess, transMail, transMailResetPassWord} from './../lang/vi';
@@ -8,24 +11,32 @@ import sendMail from './../config/mailer';
 let saltRounds = 7;
 let salt = bcrypt.genSaltSync(saltRounds);
 
-let register = (email, password, group, role, protocol, host) => {
+let register = (email, password, protocol, host) => {
     return new Promise(async (resolve, reject) => {
+        let memberByEmail = await MemberModel.findByEmail(email);
+        let group = await GroupModel.findById(memberByEmail.groupId);
+        let role = await RoleModel.findById(memberByEmail.roleId);
         let userByEmail = await UserModel.findByEmail(email);
-        if(userByEmail){
-            if(userByEmail.deletedAt != null){
-                return reject(transErrors.account_removed);
+        if(memberByEmail){
+            if(userByEmail){
+                if(userByEmail.deletedAt != null){
+                    return reject(transErrors.account_removed);
+                };
+                if(!userByEmail.isActive){
+                    return reject(transErrors.account_not_active);
+                };
+                return reject(transErrors.account_in_use);
             };
-            if(!userByEmail.isActive){
-                return reject(transErrors.account_not_active);
-            };
-            return reject(transErrors.account_in_use);
-        };
+        }else{
+            return reject(transErrors.account_incorrect);
+        }
 
         let userItem = {
             username: email.split("@")[0],
             email: email,
-            group: group,
-            role: role,
+            memberId: memberByEmail._id,
+            group: group.groupName,
+            role: role.roleName,
             password: bcrypt.hashSync(password, salt),
             verifyToken: uuidv4() 
         };

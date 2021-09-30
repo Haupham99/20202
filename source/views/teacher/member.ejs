@@ -1,4 +1,9 @@
 <% extend("./../main/main") %>
+<style>
+   .tab-group-class a{
+      background-color: #78bbe6
+   }
+</style>
 <script type="text/javascript" src="js/pvhau/personal.js"></script>
 <script type="text/javascript" src="js/pvhau/chat.js"></script>
 <script type="text/javascript" src="js/pvhau/groupTeacher.js"></script>
@@ -37,8 +42,8 @@
             </div>
             <div id="i-box">
                <div id="intro-line">Web developer - UI</div>
-               <div id="u-occ">Developing awesome UIs at <a href="#">Google LLC</a> Bengaluru and inspiring other companies to do so :)</div>
-               <div id="u-loc"><i class="material-icons">location_on</i><a href="#">Bengaluru</a>, <a href="#">India</a></div>
+               <!-- <div id="u-occ">Developing awesome UIs at <a href="#">Google LLC</a> Bengaluru and inspiring other companies to do so :)</div> -->
+               <div id="u-loc"><i class="material-icons">location_on</i><a href="#">Hà Nội</a>, <a href="#">Việt Nam</a></div>
             </div>
          </div>
          <div class="l-cnt l-mrg">
@@ -89,7 +94,6 @@
          </div>
          <div id="t-box">
             <a href="#">Privacy</a> <a href="#">Terms</a> <a href="#">Advertising</a> <a href="#">Ad Choices</a> <a href="#">Cookies</a> <span id="t-more">More<i class="material-icons">arrow_drop_down</i></span>
-            <div id="cpy-nt">Facebook &copy; <span id="curr-year"></span></div>
          </div>
       </div>
       <div class="td" id="m-col">
@@ -111,7 +115,7 @@
             <div id="c-tabs-cvr" style="margin-bottom: 10px;">
                <div class="tb" id="c-tabs">
                   <a href="/member"><div class="td friend active friend-all"><i class="material-icons fa-all">subject</i><span>Danh sách thành viên</span></div></a>
-                  <div class="td friend friend-request"><i class="fas fa-list-ul"></i><span>Yêu cầu tham gia</span></div>
+                  <!-- <div class="td friend friend-request"><i class="fas fa-list-ul"></i><span>Yêu cầu tham gia</span></div> -->
                   <!-- <div class="td friend friend-suggest"><i class="fas fa-user-plus"></i><span>Gợi ý mời tham gia</span></div> -->
                </div>
             </div>
@@ -128,9 +132,6 @@
                      <h5 style="font-weight: bold;"><%= item.username %> <span class="chat_date">
                         <a href="/<%= item.email.split('@')[0] %>"><button class="btn btn-success profile-success">Trang cá nhân</button></a>
                         <!-- <button type="button" class="btn btn-danger" id="cancel-friend" data-toggle="modal" data-target="#cancel-friend">Hủy kết bạn</button> -->
-                        <button type="button" class="btn btn-danger exampleModal1" data-toggle="modal" data-target="#exampleModal1">
-                           Xóa khỏi nhóm
-                         </button>
                         </span>
                      </h5>
                      <small>Email: <%= item.email %></small>

@@ -73,9 +73,20 @@ let likePost = async (req, res) => {
     }
 };
 
+let deletePost = async (req, res) => {
+    try {
+        let post = await personal.deletePost(req, res);
+        res.status("200").send({"message": "Success", "likes": post.likes + 1});
+    } catch (error) {
+        console.log(error);
+        res.status("500").send({"message": "Failed"});
+    }
+};
+
 module.exports = {
     getPersonal: getPersonal,
     postPost: postPost,
     likePost: likePost,
-    getPersonalById: getPersonalById
+    getPersonalById: getPersonalById,
+    deletePost: deletePost
 };

@@ -4,24 +4,18 @@ import bcrypt from "bcrypt";
 let Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
-    firstname: String,
-    lastname: String,
+    memberId: String,
+    roleId: String,
     username: String,
-    birthday: String,
     avatar: {type: String, default: "default.jpg"},
     coverAvatar: {type: String, default: "cover-default.jpg"},
-    group: {type: String, default: "KHMT-02-K62"},
-    // gender: {type: String, default: "male"},
-    phone: {type: Number, default: null},
-    // address: {type: String, default: "avatar-default.jpg"},
+    group: {type: String, default: "Khoa học máy tính 02-K62"},
     role: {type: String, default: "user"},
     email: {type: String, trim: true},
     password: String,
     isActive: {type: Boolean, default: false},
     verifyToken: String,
     resetToken: String,
-    joinedGroup: {type: Boolean, default: false},
-    rejectedGroup: {type: Boolean, default: false},
     createdAt: {type: Number, default: Date.now},
     updatedAt: {type: Number, default: null},
     deletedAt: {type: Number, default: null}
@@ -32,8 +26,19 @@ UserSchema.statics = {
         return this.create(item);
     },
 
+    search(searchValue){
+        return this.find({"username" : {$regex : ".*"+ searchValue +".*"}})
+    },
+
     findByEmail(email) {
         return this.findOne({"email": email}).exec();
+    },
+
+    findByEmailAndUpdate1(email, groupName) {
+        return this.findOneAndUpdate(
+            {email: email},
+            {group: groupName}
+        ).exec();
     },
 
     findByEmailAndUpdate(user) {
@@ -56,33 +61,33 @@ UserSchema.statics = {
     },
 
     findByGroup(group){
-        return this.find({group: group, joinedGroup: true, rejectedGroup: false, role: "user"}).exec();
+        return this.find({group: group}).exec();
     },
 
-    findRequestByGroup(group){
-        return this.find({group: group, joinedGroup: false, rejectedGroup: false}).exec();
-    },
+    // findRequestByGroup(group){
+    //     return this.find({group: group, joinedGroup: false, rejectedGroup: false}).exec();
+    // },
 
-    acceptMember(userId){
-        return this.findOneAndUpdate(
-            {_id: userId},
-            {joinedGroup: true}
-        ).exec();
-    },
+    // acceptMember(userId){
+    //     return this.findOneAndUpdate(
+    //         {_id: userId},
+    //         {joinedGroup: true}
+    //     ).exec();
+    // },
 
-    refuseAcceptMember(userId){
-        return this.findOneAndUpdate(
-            {_id: userId},
-            {rejectedGroup: true}
-        ).exec();
-    },
+    // refuseAcceptMember(userId){
+    //     return this.findOneAndUpdate(
+    //         {_id: userId},
+    //         {rejectedGroup: true}
+    //     ).exec();
+    // },
 
-    cancelMember(userId){
-        return this.findOneAndUpdate(
-            {_id: userId},
-            {joinedGroup: false, rejectedGroup: true}
-        ).exec();
-    },
+    // cancelMember(userId){
+    //     return this.findOneAndUpdate(
+    //         {_id: userId},
+    //         {joinedGroup: false, rejectedGroup: true}
+    //     ).exec();
+    // },
 
     verify(token) {
         return this.findOneAndUpdate(
@@ -110,21 +115,21 @@ UserSchema.statics = {
         return this.findByIdAndUpdate(id, {password: password, updatedAt: Date.now()}).exec();
     },
 
-    findByIdentify(identify){
-        return this.find({group: identify, joinedGroup: "true"}).exec();
-    },
+    // findByIdentify(identify){
+    //     return this.find({group: identify, joinedGroup: "true"}).exec();
+    // },
 
-    findMemberRequestByIdentify(identify){
-        return this.find({group: identify, joinedGroup: "false", rejectedGroup: "false"}).exec();
-    },
+    // findMemberRequestByIdentify(identify){
+    //     return this.find({group: identify, joinedGroup: "false", rejectedGroup: "false"}).exec();
+    // },
 
-    findMemberRequestAll(){
-        return this.find({joinedGroup: "false", rejectedGroup: "false"}).exec();
-    },
+    // findMemberRequestAll(){
+    //     return this.find({joinedGroup: "false", rejectedGroup: "false"}).exec();
+    // },
 
-    postResendRequest(userId){
-        return this.findByIdAndUpdate(userId, {rejectedGroup: false}).exec();
-    }
+    // postResendRequest(userId){
+    //     return this.findByIdAndUpdate(userId, {rejectedGroup: false}).exec();
+    // }
 };
 
 UserSchema.methods = {

@@ -48,9 +48,21 @@ let likePost = (req, res) => {
     });
 }
 
+let deletePost = (req, res) => {
+    let postId = req.params.postId;
+    return new Promise(async (resolve, reject) =>{
+        let result = await postModel.deletePost(postId);
+        // req.postArr = postArr;
+        // let postArr = await postModel.findByUserId(userId);
+        // console.log(result);
+        resolve(result);
+    });
+}
+
 module.exports = {
     postPost: postPost,
     getPost: getPost,
     likePost: likePost,
-    getPostByGroupId: getPostByGroupId
+    getPostByGroupId: getPostByGroupId,
+    deletePost: deletePost
 };

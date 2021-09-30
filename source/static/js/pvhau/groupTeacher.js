@@ -139,6 +139,33 @@ $("document").ready(function(){
         });
     });
     
+    // Update Cover Image
+    $('#edit-profile').one('click', function(e) {  
+        e.preventDefault();      
+        console.log("update-image");
+        $("#choose-image").click();
+        $('#choose-image').change(function() {
+            let groupId = sessionStorage.getItem('groupId');
+            var filename = $('#choose-image').val();
+            console.log(filename.split('\\')[filename.split('\\').length-1]);
+            console.log(groupId);
+            $("#cover-img").attr('src', 'images/' + filename.split('\\')[filename.split('\\').length-1]);
+            $.ajax({
+
+                // url: "/personal/post/:postId/:userId/:userIdPost/:like",
+                url: "/group/update-cover/" + groupId + '/' + filename.split('\\')[filename.split('\\').length-1],
+                type: "POST",
+                contentType: false,
+                success: function(result){
+                    alert("Cập nhật thành công!");
+                },
+                error: function(result){
+                    alert("Có lỗi xảy ra, xin thử lại!");
+                },
+            });
+        });
+    });
+
     // Send friend request
     // $(document).on('click', ".send-friend-request", function(e) {
     //     let a = $(this);

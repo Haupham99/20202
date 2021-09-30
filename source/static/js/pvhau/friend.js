@@ -99,7 +99,7 @@ $("document").ready(function(){
         // console.log("Clicked");
         let contactId = sessionStorage.getItem("userId");
         let userId = a.parents().eq(3).find("p.accept-friend").text();
-        // console.log(userId, contactId);
+        console.log(userId, contactId);
         $.ajax({
 
             // url: "/personal/post/:postId/:userId/:userIdPost/:like",

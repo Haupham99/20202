@@ -141,10 +141,10 @@ let postRegister = async (req, res) => {
   };
 
   try {
-    let group = req.body["group"] + "-" + req.body["year"];
-    let role = req.body["role"];
+    // let group = req.body["group"] + "-" + req.body["year"];
+    // let role = req.body["role"];
     // console.log(role);
-    let createUserSuccess = await auth.register(req.body["email-register"], req.body["pwd-register"], group, role, req.protocol, req.get("host"));
+    let createUserSuccess = await auth.register(req.body["email-register"], req.body["pwd-register"], req.protocol, req.get("host"));
     successArr.push(createUserSuccess);
     req.flash("success", successArr);
     return res.redirect('/login');
